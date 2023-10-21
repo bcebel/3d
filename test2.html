@@ -9,7 +9,7 @@
     <div id="compassDirection"></div>
 
     <script>
-        window.addEventListener('deviceorientation', handleOrientation);
+        window.addEventListener('deviceorientationabsolute', handleOrientation);
 
         function handleOrientation(event) {
             const compassDirection = event.absolute;
