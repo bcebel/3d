@@ -2,6 +2,7 @@
 <html ⚡>
 
 <head>
+    <script async custom-element="amp-script" src="https://cdn.ampproject.org/v0/amp-script-0.1.js"></script>
     <script async custom-element="amp-story-360" src="https://cdn.ampproject.org/v0/amp-story-360-0.1.js"></script>
     <meta charset="utf-8">
     <title>Joy of Pets</title>
@@ -135,6 +136,12 @@
 </head>
 
 <body>
+    <script>
+        window.addEventListener("deviceorientation", (event) => {
+            console.log("wombat");
+        console.log(`${event.alpha} : ${event.beta} : ${event.gamma}`);
+        });
+    </script>
     <amp-story standalone title="Joy of Pets" publisher="AMP tutorials"
         publisher-logo-src="assets/AMP-Brand-White-Icon.svg" poster-portrait-src="assets/cover.jpg">
         <amp-story-page id="cover">
