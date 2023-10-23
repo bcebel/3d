@@ -1,7 +1,7 @@
 console.log("this");
 const p = document.createElement("p");
 
-window.addEventListener("deviceorientation", handleOrientation);
+window.addEventListener("deviceorientationabsolute", handleOrientation);
 
 function handleOrientation(event) {
   const compassDirection = event.alpha;
