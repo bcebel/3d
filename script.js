@@ -1,4 +1,4 @@
-
+console.log("this");
        window.addEventListener('deviceorientationabsolute', handleOrientation);
 
         function handleOrientation(event) {
