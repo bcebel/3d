@@ -2,6 +2,7 @@
 <html ⚡>
 
 <head>
+    <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
     <script async custom-element="amp-script" src="https://cdn.ampproject.org/v0/amp-script-0.1.js"></script>
     <script async custom-element="amp-story-360" src="https://cdn.ampproject.org/v0/amp-story-360-0.1.js"></script>
     <meta charset="utf-8">
@@ -144,21 +145,21 @@
 
 <body>
     hello
-    <amp-script src="script.js" width="300" height="100">
+    <amp-script src="script.js" width="300" height="800">
         <div id="compassDirection"></div>
-    </amp-script>
-    <!--
+
+
     <amp-story standalone title="Feng Shi" publisher="bcode" publisher-logo-src="assets/AMP-Brand-White-Icon.svg"
         poster-portrait-src="assets/cover.jpg">
         <amp-story-page id="cover">
             <amp-story-360 layout="fill" controls="gyroscope" heading-start="0" pitch-start="0" zoom-start="2"
-                scene-heading="50" heading-end="360" pitch-end="0" duration="3s">
+                scene-heading="50" heading-end={{compassDirection}} pitch-end="0" duration="3s">
                 <amp-img layout="fill" src="fs2.jpg"></amp-img>
             </amp-story-360>
         </amp-story-page>
     </amp-story>
+    </amp-script>
 
--->
 
 
 
