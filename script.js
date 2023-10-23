@@ -1,4 +1,6 @@
 console.log("this");
+const p = document.createElement("p");
+
 
 
        window.addEventListener('deviceorientationabsolute', handleOrientation);
@@ -6,7 +8,10 @@ console.log("this");
         function handleOrientation(event) {
             const compassDirection = event.alpha;
             console.log(compassDirection);
-            const p = document.createElement("p");
-        p.textContent = compassDirection;
-        document.body.appendChild(p);
+            if (compassDirection !== null) {
+                // Update the DOM element with the compass direction value
+                document.getElementById('compassDirection').innerText = `Compass Direction: ${compassDirection}°`;
+            }
         }
+        p.textContent = "A second line of text";
+        document.body.appendChild(p);
