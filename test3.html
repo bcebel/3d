@@ -1,0 +1,35 @@
+<!doctype html>
+<html ⚡>
+<html amp lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>AMP Phone Direction</title>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script async custom-element="amp-script" src="https://cdn.ampproject.org/v0/amp-script-0.1.js"></script>
+    <style amp-custom>
+        /* Your custom styles here */
+    </style>
+</head>
+
+<body>
+    <div id="compassDirection"></div>
+
+    <amp-script layout="container" width="1000" height="1000" script="amp-script-sample" class="i-amphtml-layout-container">
+        <script type="text/plain" target="amp-script-sample">
+        const compassDirectionElement = document.getElementById('compassDirection');
+
+        function handleOrientation(event) {
+          const compassDirection = event.alpha;
+
+          if (compassDirection !== null) {
+            compassDirectionElement.textContent = `Compass Direction: ${compassDirection}°`;
+          }
+        }
+
+        window.addEventListener('deviceorientationabsolute', handleOrientation);
+      </script>
+    </amp-script>
+</body>
+
+</html>
