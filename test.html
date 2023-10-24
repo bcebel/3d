@@ -3,6 +3,7 @@
 
 <head>
         <script async src="https://cdn.ampproject.org/v0.js"></script>
+        <meta name="amp-script-src" content="sha384-jGcZxwWYgBU0MepYPjw1WchnzHSHZHigZtRncTI-OneOsS9hJqkORv7XZffFnjSV">
     <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js">
 </script>
     <script async custom-element="amp-render" src="https://cdn.ampproject.org/v0/amp-render-1.0.js"></script>
@@ -159,7 +160,7 @@
         poster-portrait-src="assets/cover.jpg">
         <amp-story-page id="cover">
             <amp-script data-ampdevmode layout="fixed" height="500" width="500" script="compassLogic">
-                <amp-story-360 id="inputCompass" scene-heading="" layout="fill" controls="gyroscope"  zoom-start="2">
+                <amp-story-360 id="inputCompass"  layout="fill" controls="gyroscope"  zoom-start="2">
                     <amp-img layout="fill" src="fengshui.jpg"></amp-img>
                 </amp-story-360>
             </amp-script>
@@ -170,16 +171,14 @@
          console.log (compassDirection.attributes[1])
 
   console.log(compassDirection.attributes[1])
-                compassDirection.addEventListener("deviceorientationabsolute", handleOrientation);
-     const wombat = compassDirection.attributes[1]
-         console.log(wombat)
-
-        function handleOrientation(event) {
+        
+  compassDirection.addEventListener("deviceorientationabsolute", handleOrientation);
+  console.log(compassDirection)
+          function handleOrientation(event) {
             const startingCompass = event.alpha;
             console.log(startingCompass);
-              compassDirection.attributes[1]=startingCompass;
-
-
+              compassDirection.attributes.setAttribute("scene-heading", startingCompass);
+            console.log(compassDirection.attributes)
             }
         
 
