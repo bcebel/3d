@@ -166,22 +166,22 @@
             </amp-script>
             <script type=text/plain id="compassLogic" target="amp-script">
   
-                console.log("wombat")
-         const 360story = document.getElementById("inputCompass");
+console.log("wombat")
+const storied = document.getElementById("inputCompass");
 
-console.log(360story)
+console.log(storied)
 console.log("connection?")
 console.log(window)
 
-  360story.addEventListener("deviceorientationabsolute", handleOrientation);
+  storied.addEventListener("deviceorientationabsolute", handleOrientation);
 
 function handleOrientation(event) {
 var startingCompass = event.alpha;
 console.log(event.alpha)
 const startCompass = 360-startingCompass[1];
 console.log(startCompass)
-              compassDirection.attributes.setAttribute("scene-heading", startCompass);
-            console.log(compassDirection.attributes)
+              storied.attributes.setAttribute("scene-heading", startCompass);
+            console.log(storied.attributes)
             }
         
 
