@@ -2,8 +2,16 @@
 <html>
 
 <head>
+        <script async src="https://cdn.ampproject.org/v0.js"></script>
     <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js">
-    </script>
+</script>
+    <script async custom-element="amp-render" src="https://cdn.ampproject.org/v0/amp-render-1.0.js"></script>
+
+
+    <meta name="amp-script-src" content="sha384-jGcZxwWYgBU0MepYPjw1WchnzHSHZHigZtRncTI-OneOsS9hJqkORv7XZffFnjSV">
+
+
+
     <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
     <script async custom-element="amp-script" src="https://cdn.ampproject.org/v0/amp-script-0.1.js"></script>
     <script async custom-element="amp-story-360" src="https://cdn.ampproject.org/v0/amp-story-360-0.1.js"></script>
@@ -80,7 +88,7 @@
             }
         </style>
     </noscript>
-    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
     <link href="https://fonts.googleapis.com/css?family=Oswald:200,300,400" rel="stylesheet">
     <style amp-custom>
         amp-story {
@@ -150,23 +158,33 @@
     <amp-story standalone title="Feng Shi" publisher="bcode" publisher-logo-src="assets/AMP-Brand-White-Icon.svg"
         poster-portrait-src="assets/cover.jpg">
         <amp-story-page id="cover">
-            <amp-script layout="fixed" height="500" width="500" script="compassLogic" data-ampdevmode>
-                <amp-story-360 id="inputCompass" layout="fill" controls="gyroscope" pitch-start="0" zoom-start="2"
-                    pitch-end="0" heading-end="5" duration="3s" heading-start="0">
+            <amp-script data-ampdevmode layout="fixed" height="500" width="500" script="compassLogic">
+                <amp-story-360 id="inputCompass" scene-heading="180" layout="fill" controls="gyroscope"  zoom-start="2">
                     <amp-img layout="fill" src="fengshui.jpg"></amp-img>
                 </amp-story-360>
             </amp-script>
-            <script id="compassLogic" target="amp-script">
-
-                const compassDirection = document.getElementById("inputCompass");
+            <script type=text/plain id="compassLogic" target="amp-script">
+                console.log("wombat")
+         const compassDirection = document.getElementById("inputCompass");
+         console.log (compassDirection.attributes[1])
+  
                 compassDirection.addEventListener("deviceorientationabsolute", handleOrientation);
-                async function handleOrientation(event) {
-                    const alpha = 360 - event.alpha;
-                    const directions = await AMP.getState("alpha");
-                    console.log(directions);
-                }
-                jsonCompassDirection = JSON.parse(directions).items;
-                compassDirection.setAttribute("scene-heading", jsonCompassDirection);
+     const wombat = compassDirection.attributes[1]
+         console.log(wombat)
+
+        function handleOrientation(event) {
+            const compassDirection = event.alpha;
+            console.log(compassDirection);
+const directions=AMP.getState(compassDirection)
+               
+jsonCompassDirection = JSON.parse(directions).items;
+                wombat.setAttribute("scene-heading", jsonCompassDirection);
+                console.log(wombat)
+
+
+            }
+        
+
 
             </script>
         </amp-story-page>
@@ -177,3 +195,16 @@
 </body>
 
 </html>
+
+<!--               var directions;
+                const compassDirection = document.getElementById("inputCompass");
+                compassDirection.addEventListener("deviceorientationabsolute", handleOrientation);
+                async function handleOrientation(event) {
+                    const alpha = 360
+                    console.log(alpha);
+                    directions = await AMP.getState(alpha);
+                    console.log(directions);
+                }
+                jsonCompassDirection = JSON.parse(directions).items;
+                compassDirection.setAttribute("scene-heading", jsonCompassDirection);
+-->
