@@ -173,12 +173,12 @@ console.log(storied)
 console.log("connection?")
 console.log(window)
 
-  storied.addEventListener("deviceorientationabsolute", handleOrientation);
-
+window.addEventListener("deviceorientationabsolute", handleOrientation);
+console.log(window)
 function handleOrientation(event) {
 var startingCompass = event.alpha;
 console.log(event.alpha)
-const startCompass = 360-startingCompass[1];
+const startCompass = 360-startingCompass[0];
 console.log(startCompass)
               storied.attributes.setAttribute("scene-heading", startCompass);
             console.log(storied.attributes)
