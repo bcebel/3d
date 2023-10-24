@@ -166,26 +166,16 @@
             </amp-script>
             <script type=text/plain id="compassLogic" target="amp-script">
   
-console.log("wombat")
-const storied = document.getElementById("inputCompass");
+        window.addEventListener('deviceorientationabsolute', handleOrientation);
 
-console.log(storied)
-console.log("connection?")
-console.log(window)
+        function handleOrientation(event) {
+            const compassDirection = event.alpha;
 
-window.addEventListener("deviceorientationabsolute", handleOrientation);
-console.log(window)
-function handleOrientation(event) {
-var startingCompass = event.alpha;
-   var jsonCompassDirection = JSON.parse(startingCompass).items;
-
-console.log(event.alpha)
-const startCompass = 360-startingCompass[0];
-console.log(startCompass)
-              storied.attributes.setAttribute("scene-heading", startCompass);
-            console.log(storied.attributes)
+            if (compassDirection !== null) {
+                // Update the DOM element with the compass console.log(`Compass Direction: ${compassDirection}°`);
+                
             }
-        
+        }
 
 
             </script>
