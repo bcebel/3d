@@ -14,3 +14,4 @@ function handleOrientation(event) {
     console.log(inputCompass.compassDirection);
   }
 }
+
