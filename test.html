@@ -172,9 +172,10 @@
 
   console.log(compassDirection)
         
-  compassDirection.addEventListener("deviceorientationabsolute", handleOrientation);
+  window.addEventListener("deviceorientationabsolute", handleOrientation);
   console.log("connection?")
-  console.log(compassDirection)
+  console.log(window)
+
           function handleOrientation(event) {
             const startingCompass = event.alpha;
             console.log(startingCompass);
