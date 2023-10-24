@@ -2,8 +2,8 @@
 <html ⚡>
 
 <head>
-<script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js">
-</script>
+    <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js">
+    </script>
     <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
     <script async custom-element="amp-script" src="https://cdn.ampproject.org/v0/amp-script-0.1.js"></script>
     <script async custom-element="amp-story-360" src="https://cdn.ampproject.org/v0/amp-story-360-0.1.js"></script>
@@ -150,41 +150,25 @@
     <amp-story standalone title="Feng Shi" publisher="bcode" publisher-logo-src="assets/AMP-Brand-White-Icon.svg"
         poster-portrait-src="assets/cover.jpg">
         <amp-story-page id="cover">
-                <amp-script layout="fixed" height="500" width="500" script="compassLogic" data-ampdevmode>
+            <amp-script layout="fixed" height="500" width="500" script="compassLogic" data-ampdevmode>
                 <amp-story-360 id="inputCompass" layout="fill" controls="gyroscope" pitch-start="0" zoom-start="2"
                     pitch-end="0" heading-end="5" duration="3s" heading-start="0">
                     <amp-img layout="fill" src="fs2.jpg"></amp-img>
                 </amp-story-360>
-                    </amp-script>
-                    <script type ="text/plain" id="compassLogic" target="amp-script">
-window.addEventListener("deviceorientationabsolute", handleOrientation);
+            </amp-script>
+            <script id="compassLogic" target="amp-script">
 
-function handleOrientation(event) {
+                const compassDirection = document.getElementById("inputCompass");
+                compassDirection.addEventListener("deviceorientationabsolute", handleOrientation);
+                async function handleOrientation(event) {
+                    const alpha = 360 - event.alpha;
+                    const directions = await AMP.getState("alpha");
+                    console.log(directions);
+                }
+                jsonCompassDirection = JSON.parse(directions).items;
+                compassDirection.setAttribute("scene-heading", jsonCompassDirection);
 
-  const compassDirection = 360 - event.alpha;
-
-  console.log(compassDirection);
-  if (compassDirection !== null) {
-    // Update the DOM element with the compass direction value
-    document.getElementById("inputCompass").setAttribute =
-      (heading - end, compassDirection);
-    console.log(inputCompass.compassDirection);
-  }
-}
-
-
-
-const compassDirection = document.getElementById("inputCompass");
-async function handleOrientation(event) {
-    const alpha = 360-event.alpha;
-const directions=await AMP.getState("alpha");
-console.log(directions);
-}
-jsonCompassDirection = JSON.parse(directions).items;
-compassDirection.addEventListener("deviceorientationabsolute", handleOrientation);
-
-
-                    </script>
+            </script>
         </amp-story-page>
     </amp-story>
 
