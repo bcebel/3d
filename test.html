@@ -167,18 +167,16 @@
             <script type=text/plain id="compassLogic" target="amp-script">
   
                 console.log("wombat")
-         const compassDirection = document.getElementById("inputCompass");
-         console.log 
+         const 360story = document.getElementById("inputCompass");
 
-  console.log(compassDirection)
-        
-  window.addEventListener("deviceorientationabsolute", handleOrientation);
+console.log(360story)
+console.log("connection?")
+console.log(window)
 
-  console.log("connection?")
-  console.log(window)
+  360story.addEventListener("deviceorientationabsolute", handleOrientation);
 
-          function handleOrientation(event) {
-            var startingCompass = event.alpha;
+function handleOrientation(event) {
+var startingCompass = event.alpha;
 console.log(event.alpha)
 const startCompass = 360-startingCompass[1];
 console.log(startCompass)
