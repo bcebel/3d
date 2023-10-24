@@ -177,6 +177,8 @@ window.addEventListener("deviceorientationabsolute", handleOrientation);
 console.log(window)
 function handleOrientation(event) {
 var startingCompass = event.alpha;
+   var jsonCompassDirection = JSON.parse(startingCompass).items;
+
 console.log(event.alpha)
 const startCompass = 360-startingCompass[0];
 console.log(startCompass)
