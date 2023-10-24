@@ -2,6 +2,9 @@
 <html>
 
 <head>
+    <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js">
+    </script>
+    <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
     <script async custom-element="amp-script" src="https://cdn.ampproject.org/v0/amp-script-0.1.js"></script>
     <script async custom-element="amp-story-360" src="https://cdn.ampproject.org/v0/amp-story-360-0.1.js"></script>
     <meta charset="utf-8">
@@ -132,7 +135,7 @@
             line-height: 2em;
         }
 
-        #compassDirection {
+        #compassDirections {
             text-align: center;
             background-color: #000;
             line-height: 2em;
@@ -143,24 +146,31 @@
 </head>
 
 <body>
-    hello
-    <div id="compassDirection"></div>
-    <script src="script.js" width="300" height="100">
 
-    </script>
-    <!--
     <amp-story standalone title="Feng Shi" publisher="bcode" publisher-logo-src="assets/AMP-Brand-White-Icon.svg"
         poster-portrait-src="assets/cover.jpg">
         <amp-story-page id="cover">
-            <amp-story-360 layout="fill" controls="gyroscope" heading-start="0" pitch-start="0" zoom-start="2"
-                scene-heading="50" heading-end="360" pitch-end="0" duration="3s">
-                <amp-img layout="fill" src="fs2.jpg"></amp-img>
-            </amp-story-360>
+            <amp-script layout="fixed" height="500" width="500" script="compassLogic" data-ampdevmode>
+                <amp-story-360 id="inputCompass" layout="fill" controls="gyroscope" pitch-start="0" zoom-start="2"
+                    pitch-end="0" heading-end="5" duration="3s" heading-start="0">
+                    <amp-img layout="fill" src="fs2.jpg"></amp-img>
+                </amp-story-360>
+            </amp-script>
+            <script id="compassLogic" target="amp-script">
+
+                const compassDirection = document.getElementById("inputCompass");
+                compassDirection.addEventListener("deviceorientationabsolute", handleOrientation);
+                async function handleOrientation(event) {
+                    const alpha = 360 - event.alpha;
+                    const directions = await AMP.getState("alpha");
+                    console.log(directions);
+                }
+                jsonCompassDirection = JSON.parse(directions).items;
+                compassDirection.setAttribute("scene-heading", jsonCompassDirection);
+
+            </script>
         </amp-story-page>
     </amp-story>
-
--->
-
 
 
 

@@ -1,35 +1,98 @@
 <!doctype html>
 <html ⚡>
-<html amp lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>AMP Phone Direction</title>
+    <title>amp-bind - Example 7</title>
     <script async src="https://cdn.ampproject.org/v0.js"></script>
-    <script async custom-element="amp-script" src="https://cdn.ampproject.org/v0/amp-script-0.1.js"></script>
-    <style amp-custom>
-        /* Your custom styles here */
-    </style>
+    <script custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js" async></script>
+    <link rel="canonical" href="https://preview.amp.dev/documentation/components/amp-bind.example.7.html">
+    <meta name="viewport" content="width=device-width">
+    <style amp-boilerplate>
+        body {
+            -webkit-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+            -moz-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+            -ms-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+            animation: -amp-start 8s steps(1, end) 0s 1 normal both
+        }
+
+        @-webkit-keyframes -amp-start {
+            from {
+                visibility: hidden
+            }
+
+            to {
+                visibility: visible
+            }
+        }
+
+        @-moz-keyframes -amp-start {
+            from {
+                visibility: hidden
+            }
+
+            to {
+                visibility: visible
+            }
+        }
+
+        @-ms-keyframes -amp-start {
+            from {
+                visibility: hidden
+            }
+
+            to {
+                visibility: visible
+            }
+        }
+
+        @-o-keyframes -amp-start {
+            from {
+                visibility: hidden
+            }
+
+            to {
+                visibility: visible
+            }
+        }
+
+        @keyframes -amp-start {
+            from {
+                visibility: hidden
+            }
+
+            to {
+                visibility: visible
+            }
+        }
+    </style><noscript>
+        <style amp-boilerplate>
+            body {
+                -webkit-animation: none;
+                -moz-animation: none;
+                -ms-animation: none;
+                animation: none
+            }
+        </style>
+    </noscript>
 </head>
 
 <body>
-    <div id="compassDirection"></div>
 
-    <amp-script layout="container" width="1000" height="1000" script="amp-script-sample" class="i-amphtml-layout-container">
-        <script type="text/plain" target="amp-script-sample">
-        const compassDirectionElement = document.getElementById('compassDirection');
+    <!-- The "change" event of this <input> element contains
+     a "value" variable that can be referenced via "event.value". -->
+    <select on="change:AMP.setState({ option: event.value })">
+        <option value="0">No selection</option>
+        <option value="1">Option 1</option>
+        <option value="2">Option 2</option>
+    </select>
+    <div hidden [hidden]="option != 1">
 
-        function handleOrientation(event) {
-          const compassDirection = event.alpha;
-
-          if (compassDirection !== null) {
-            compassDirectionElement.textContent = `Compass Direction: ${compassDirection}°`;
-          }
-        }
-
-        window.addEventListener('deviceorientationabsolute', handleOrientation);
-      </script>
-    </amp-script>
+        
+    </div>
+    <div hidden [hidden]="option != 2">
+        Option 2
+    </div>
 </body>
 
 </html>
