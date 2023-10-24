@@ -179,8 +179,8 @@
 
           function handleOrientation(event) {
             var startingCompass = event.alpha;
-            console.log(event.alpha);
-const startCompass = startingCompass[1];
+
+const startCompass = 360-startingCompass[1];
 console.log(startCompass)
               compassDirection.attributes.setAttribute("scene-heading", startCompass);
             console.log(compassDirection.attributes)
