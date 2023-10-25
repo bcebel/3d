@@ -162,7 +162,7 @@
             <amp-script data-ampdevmode layout="fixed" height="500" width="500" script="compassLogic">
                 <amp-story-360 id="inputCompass"  layout="fill" controls="gyroscope"  zoom-start="2">
 
-                    <amp-img class="classyimage" layout="fill"></amp-img>
+                    <amp-img class="classyimage" layout="fill" src="fengshui.jpg"></amp-img>
 
                 </amp-story-360>
             </amp-script>
@@ -176,9 +176,6 @@ console.log("things")
             const compassDirection = event.alpha;
 
             if (compassDirection !== null | compassDirection !== undefined) {
-                const newDiv = document.querySelector("classyimage");
-                newDiv.setAttribute("src", "fengshui.jpg")
-                console.log(newDiv);
                 // Update the DOM element with the compass 
                 const newDirection = document.querySelector("#inputCompass");
                 JSONDirection=JSON.parse(compassDirection);
