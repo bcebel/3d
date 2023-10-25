@@ -170,22 +170,39 @@
             <script  id="compassLogic" target="amp-script">
 
 console.log("things")
-        window.addEventListener('deviceorientationabsolute', handleOrientation);
+    function handleOrientation(event) {
+        const compassDirection = event.alpha;
 
-        function handleOrientation(event) {
-            const compassDirection = event.alpha;
+        if (compassDirection !== null && compassDirection !== undefined) {
+            // Update the DOM element with the compass 
+            const newDirection = document.querySelector("#inputCompass");
+            JSONDirection = JSON.parse(compassDirection);
+            newDirection.setAttribute("scene-heading", JSONDirection);
+            console.log(newDirection);
+            console.log(`Compass Direction: ${compassDirection}°`);
 
-            if (compassDirection !== null | compassDirection !== undefined) {
-                // Update the DOM element with the compass 
-                const newDirection = document.querySelector("#inputCompass");
-                JSONDirection=JSON.parse(compassDirection);
-                newDirection.setAttribute("scene-heading", JSONDirection);
-                console.log(newDirection);
-                console.log(`Compass Direction: ${compassDirection}°`);
-            }
+            // Remove the event listener after it has been executed
             window.removeEventListener('deviceorientationabsolute', handleOrientation);
         }
+    }
 
+    function waitForCompassReading() {
+        return new Promise(resolve => {
+            const listener = (event) => {
+                handleOrientation(event);
+                resolve();
+            };
+
+            window.addEventListener('deviceorientationabsolute', listener);
+        });
+    }
+
+    async function initialize() {
+        await waitForCompassReading();
+        // Code here will run after the compass reading has been received
+    }
+
+    initialize();
             </script>
         </amp-story-page>
     </amp-story>
