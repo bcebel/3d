@@ -168,24 +168,6 @@
             </amp-script>
 
             <script  id="compassLogic" target="amp-script">
-
-console.log("things")
-    function handleOrientation(event) {
-        const compassDirection = event.alpha;
-
-        if (compassDirection !== null && compassDirection !== undefined) {
-            // Update the DOM element with the compass 
-            const newDirection = document.querySelector("#inputCompass");
-            JSONDirection = JSON.parse(compassDirection);
-            newDirection.setAttribute("scene-heading", JSONDirection);
-            console.log(newDirection);
-            console.log(`Compass Direction: ${compassDirection}°`);
-
-            // Remove the event listener after it has been executed
-            window.removeEventListener('deviceorientationabsolute', handleOrientation);
-        }
-    }
-
     function waitForCompassReading() {
         return new Promise(resolve => {
             const listener = (event) => {
@@ -205,26 +187,26 @@ console.log("things")
                 }
             };
 
-            // Set up a loop to continuously listen for compass events
-            const interval = setInterval(() => {
-                window.addEventListener('deviceorientationabsolute', listener);
-            }, 1000);
+            // Check if compassDirection is already available
+            if (compassDirection !== null && compassDirection !== undefined) {
+                handleOrientation({ alpha: compassDirection }); // Call handleOrientation with the available compassDirection
+                resolve(); // Resolve the promise
+            } else {
+                // Set up a loop to continuously listen for compass events
+                const interval = setInterval(() => {
+                    window.addEventListener('deviceorientationabsolute', listener);
+                }, 1000);
 
-            // Stop the loop after a certain amount of time (in this example, 10 seconds)
-            setTimeout(() => {
-                clearInterval(interval);
-                console.log("Stopped listening for compass events after 10 seconds.");
-            }, 10000);
+                // Stop the loop after a certain amount of time (in this example, 10 seconds)
+                setTimeout(() => {
+                    clearInterval(interval);
+                    console.log("Stopped listening for compass events after 10 seconds.");
+                }, 10000);
+            }
         });
     }
 
-    async function initialize() {
-        await waitForCompassReading();
-        // Code here will run after the compass reading has been received
-    }
 
-    initialize();
-    
             </script>
         </amp-story-page>
     </amp-story>
