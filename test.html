@@ -190,10 +190,31 @@ console.log("things")
         return new Promise(resolve => {
             const listener = (event) => {
                 handleOrientation(event);
-                resolve();
+                if (window.DeviceOrientationEvent.requestPermission) {
+                    window.DeviceOrientationEvent.requestPermission()
+                        .then(permissionState => {
+                            if (permissionState === 'granted') {
+                                // The user granted permission
+                                resolve();
+                            }
+                        })
+                        .catch(console.error);
+                } else {
+                    // No need to request permission, continue
+                    resolve();
+                }
             };
 
-            window.addEventListener('deviceorientationabsolute', listener);
+            // Set up a loop to continuously listen for compass events
+            const interval = setInterval(() => {
+                window.addEventListener('deviceorientationabsolute', listener);
+            }, 1000);
+
+            // Stop the loop after a certain amount of time (in this example, 10 seconds)
+            setTimeout(() => {
+                clearInterval(interval);
+                console.log("Stopped listening for compass events after 10 seconds.");
+            }, 10000);
         });
     }
 
@@ -203,6 +224,7 @@ console.log("things")
     }
 
     initialize();
+    
             </script>
         </amp-story-page>
     </amp-story>
