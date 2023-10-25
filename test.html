@@ -161,22 +161,30 @@
         <amp-story-page id="cover">
             <amp-script data-ampdevmode layout="fixed" height="500" width="500" script="compassLogic">
                 <amp-story-360 id="inputCompass"  layout="fill" controls="gyroscope"  zoom-start="2">
-                    <amp-img layout="fill" src="fengshui.jpg"></amp-img>
+
+                    <amp-img class="classyimage" layout="fill" src="fengshui.jpg"></amp-img>
+
                 </amp-story-360>
             </amp-script>
-            <script type=text/plain id="compassLogic" target="amp-script">
-  
+            <script  id="compassLogic" target="amp-script">
+console.log("things")
         window.addEventListener('deviceorientationabsolute', handleOrientation);
+const newDiv = document.querySelector(".classyimage");
+console.log(newDiv);
+newDiv.setAttribute("src","test.jpg");
+const newDirection=document.querySelector("#inputCompass");
 
         function handleOrientation(event) {
             const compassDirection = event.alpha;
 
             if (compassDirection !== null) {
-                // Update the DOM element with the compass console.log(`Compass Direction: ${compassDirection}°`);
+                // Update the DOM element with the compass 
+                newDirection.setAttribute("scene-heading", compassDirection);
+                console.log(newDirection)
+                console.log(`Compass Direction: ${compassDirection}°`);
                 
             }
         }
-
 
             </script>
         </amp-story-page>
