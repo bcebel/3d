@@ -166,26 +166,26 @@
 
                 </amp-story-360>
             </amp-script>
+
             <script  id="compassLogic" target="amp-script">
+                
 console.log("things")
         window.addEventListener('deviceorientationabsolute', handleOrientation);
-
-
-
 
         function handleOrientation(event) {
             const compassDirection = event.alpha;
 
             if (compassDirection !== null | compassDirection !== undefined) {
+                                const newDiv = document.querySelector(".classyimage");
+                newDiv.setAttribute("src", "fengshui.jpg")
+                console.log(newDiv);
                 // Update the DOM element with the compass 
                 const newDirection = document.querySelector("#inputCompass");
                 newDirection.setAttribute("scene-heading", compassDirection);
                 newDirection.setAttribute("pitch-start", 0);
                 console.log(newDirection);
                 console.log(`Compass Direction: ${compassDirection}°`);
-                const newDiv = document.querySelector(".classyimage");
-                newDiv.setAttribute("src", "fengshui.jpg")
-                console.log(newDiv);
+
                 
             }
         }
