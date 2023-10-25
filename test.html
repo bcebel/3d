@@ -2,10 +2,10 @@
 <html>
 
 <head>
-        <script async src="https://cdn.ampproject.org/v0.js"></script>
-        <meta name="amp-script-src" content="sha384-jGcZxwWYgBU0MepYPjw1WchnzHSHZHigZtRncTI-OneOsS9hJqkORv7XZffFnjSV">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <meta name="amp-script-src" content="sha384-jGcZxwWYgBU0MepYPjw1WchnzHSHZHigZtRncTI-OneOsS9hJqkORv7XZffFnjSV">
     <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js">
-</script>
+    </script>
     <script async custom-element="amp-render" src="https://cdn.ampproject.org/v0/amp-render-1.0.js"></script>
 
 
@@ -160,52 +160,35 @@
         poster-portrait-src="assets/cover.jpg">
         <amp-story-page id="cover">
             <amp-script data-ampdevmode layout="fixed" height="500" width="500" script="compassLogic">
-                <amp-story-360 id="inputCompass"  layout="fill" controls="gyroscope"  zoom-start="2">
+                <amp-story-360 id="inputCompass" layout="fill" controls="gyroscope" zoom-start="2">
 
                     <amp-img class="classyimage" layout="fill" src="fengshui.jpg"></amp-img>
 
                 </amp-story-360>
             </amp-script>
 
-            <script  id="compassLogic" target="amp-script">
-    function waitForCompassReading() {
-        return new Promise(resolve => {
-            const listener = (event) => {
-                handleOrientation(event);
-                if (window.DeviceOrientationEvent.requestPermission) {
-                    window.DeviceOrientationEvent.requestPermission()
-                        .then(permissionState => {
-                            if (permissionState === 'granted') {
-                                // The user granted permission
-                                resolve();
-                            }
-                        })
-                        .catch(console.error);
-                } else {
-                    // No need to request permission, continue
-                    resolve();
+            <script id="compassLogic" target="amp-script">
+
+                console.log("things")
+                const wombat = document.getElementById("inputCompass");
+                if (!wombat.hasAttribute("scene-heading")) {
+                    window.addEventListener('deviceorientationabsolute', handleOrientation);
+
+                    function handleOrientation(event) {
+                        const compassDirection = event.alpha;
+
+                        if (compassDirection !== null | compassDirection !== undefined) {
+                            // Update the DOM element with the compass 
+                            const newDirection = document.querySelector("#inputCompass");
+                            JSONDirection = JSON.parse(compassDirection);
+                            newDirection.setAttribute("scene-heading", JSONDirection);
+                            console.log(newDirection);
+                            console.log(`Compass Direction: ${compassDirection}°`);
+                            return compassDirection;
+                            window.removeEventListener('deviceorientationabsolute', handleOrientation);
+                        }
+                    }
                 }
-            };
-
-            // Check if compassDirection is already available
-            if (compassDirection !== null && compassDirection !== undefined) {
-                handleOrientation({ alpha: compassDirection }); // Call handleOrientation with the available compassDirection
-                resolve(); // Resolve the promise
-            } else {
-                // Set up a loop to continuously listen for compass events
-                const interval = setInterval(() => {
-                    window.addEventListener('deviceorientationabsolute', listener);
-                }, 1000);
-
-                // Stop the loop after a certain amount of time (in this example, 10 seconds)
-                setTimeout(() => {
-                    clearInterval(interval);
-                    console.log("Stopped listening for compass events after 10 seconds.");
-                }, 10000);
-            }
-        });
-    }
-
 
             </script>
         </amp-story-page>
