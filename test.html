@@ -180,7 +180,7 @@ console.log(newDiv);
             if (compassDirection !== null) {
                 // Update the DOM element with the compass 
                 const newDirection = document.querySelector("#inputCompass");
-                newDirection.setAttribute("scene-heading", 300-compassDirection);
+                newDirection.setAttribute("scene-heading", compassDirection);
                 newDirection.setAttribute("pitch-start", 0);
                 console.log(newDirection)
                 console.log(`Compass Direction: ${compassDirection}°`);
