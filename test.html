@@ -168,7 +168,7 @@
             </amp-script>
 
             <script  id="compassLogic" target="amp-script">
-                
+
 console.log("things")
         window.addEventListener('deviceorientationabsolute', handleOrientation);
 
@@ -186,8 +186,10 @@ console.log("things")
                 console.log(newDirection);
                 console.log(`Compass Direction: ${compassDirection}°`);
 
+
                 
             }
+            window.removeEventListener('deviceorientationabsolute', handleOrientation);
         }
 
             </script>
