@@ -162,26 +162,18 @@
 
 
         <amp-story-page id="page-1">
-            <amp-state id="compassData">
-                <script type="application/json">
-    {
-      "compassNumber": 0
-    }
-  </script>
-            </amp-state>
-            <amp-list width="auto" height="100" layout="fixed-height" src="https://example.com/api/data"
-                items="myData.items">
-                <template type="amp-mustache">
-                    <!-- Your template for rendering each item -->
-                    <div>
-                        {{title}}
-                    </div>
-                </template>
-            </amp-list>
+
 
             <input type="number" id="manualDirectionInput" min="-180" max="180" step="1">
             <button onclick="setManualDirection()">Set Direction</button>
             <amp-script data-ampdevmode layout="fixed" height="1000" width="500" script="compassLogic">
+                            <amp-state id="compassData">
+                                <script type="application/json">
+                                {
+                                  "compassNumber": 0
+                                }
+                              </script>
+                            </amp-state>
                 <amp-story-360 id="inputCompass" layout="fill" zoom-start="2" controls="gyroscope"
                     scene-heading="[compassData.compassNumber]">
 
