@@ -181,10 +181,17 @@
             });
 
             function handleOrientation(event) {
-                const compassDirection = event.webkitCompassHeading || Math.abs(event.alpha);
-
+                const compassDirection = Math.abs(event.alpha);
+                function convertToSignedHeading(alpha) {
+                    let signedHeading = alpha - 180;
+                    if (signedHeading < -180) {
+                        signedHeading += 360;
+                    }
+                    return signedHeading;
+                }
+convertToSignedHeading(compassDirection);
                 const ampStory360 = document.querySelector('#inputCompass');
-                ampStory360.setAttribute('scene-heading', compassDirection + 'deg');
+                ampStory360.setAttribute('scene-heading', signedHeading);
             }
                 
 
