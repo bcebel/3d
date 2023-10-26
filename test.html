@@ -160,10 +160,10 @@
     <amp-story standalone title="Feng Shi" publisher="bcode" publisher-logo-src="assets/AMP-Brand-White-Icon.svg"
         poster-portrait-src="assets/cover.jpg">
 
-<amp-story-page id="page-1">
+        <amp-story-page id="page-1">
             <amp-script data-ampdevmode layout="fixed" height="1000" width="500" script="compassLogic">
                 <amp-story-360 id="inputCompass" layout="fill" zoom-start="1" controls="gyroscope">
-    
+
 
                     <amp-img src="fengshui.jpg" layout="fill" alt="..." scene-heading="0deg">
                     </amp-img>
@@ -174,26 +174,28 @@
                 console.log(document.body)
                 //    function exportFunction(name, function) { } 
                 console.log("things")
-           document.addEventListener('DOMContentLoaded', function () {
-                if (window.DeviceOrientationEvent) {
-                    window.addEventListener('deviceorientationabsolute', handleOrientation, true);
-                }
-            });
-let signedHeading;
-            function handleOrientation(event) {
-                const compassDirection = Math.abs(event.alpha);
-                function convertToSignedHeading(alpha) {
-                    signedHeading = alpha - 180;
-                    if (signedHeading < -180) {
-                        signedHeading += 360;
+                document.addEventListener('DOMContentLoaded', function () {
+                    if (window.DeviceOrientationEvent) {
+                        window.addEventListener('deviceorientationabsolute', handleOrientation, true);
                     }
-                    return signedHeading;
+                });
+                let signedHeading = 0;
+                function handleOrientation(event) {
+                    const compassDirection = Math.abs(event.alpha);
+                    function convertToSignedHeading(alpha) {
+                        signedHeading = alpha - 180;
+                        if (signedHeading < -180) {
+                            signedHeading += 360;
+                        }
+                        return signedHeading;
+                        console.log(signedHeading)
+                    }
+                    convertToSignedHeading(compassDirection);
+                    const ampStory360 = document.querySelector('#inputCompass');
+                    ampStory360.setAttribute('scene-heading', signedHeading);
+                    console.log(ampStory360)
                 }
-convertToSignedHeading(compassDirection);
-                const ampStory360 = document.querySelector('#inputCompass');
-                ampStory360.setAttribute('scene-heading', signedHeading);
-            }
-                
+
 
             </script>
         </amp-story-page>
