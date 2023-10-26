@@ -183,7 +183,7 @@
                 function handleOrientation(event) {
                     const compassDirection = Math.abs(event.alpha);
                     function convertToSignedHeading(alpha) {
-                        signedHeading = alpha - 180;
+                        signedHeading = -alpha - 180;
                         if (signedHeading < -180) {
                             signedHeading += 360;
                         }
