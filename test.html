@@ -208,10 +208,9 @@
                         compassDirection += 360;
                     }
                     console.log(finalDirection)
-                    let jsnData = JSON.parse(finalDirection)
-                    console.log(jsnData)
+        
                     const compassData = document.getElementById('compassData');
-                    compassData.setAttribute('compassNumber', jsnData);
+                    compassData.setAttribute('compassNumber', finalDirection.toString());
                     //                   const ampStory360 = document.querySelector('#inputCompass');
                     //                   ampStory360.setAttribute('scene-heading', finalDirection);
                     console.log(ampStory360)
