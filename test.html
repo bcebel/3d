@@ -160,10 +160,20 @@
     <amp-story standalone title="Feng Shi" publisher="bcode" publisher-logo-src="assets/AMP-Brand-White-Icon.svg"
         poster-portrait-src="assets/cover.jpg">
 
+
         <amp-story-page id="page-1">
+                    <amp-state id="manualDirection">
+                        <script type="application/json">
+                                {
+                                  "angle": 0
+                                }
+                              </script>
+                    </amp-state>
+                    <input type="number" id="manualDirectionInput" min="-180" max="180" step="1">
+                    <button on="tap:AMP.setState({manualDirection: {angle: document.getElementById('manualDirectionInput').value}})">Set
+                        Direction</button>
             <amp-script data-ampdevmode layout="fixed" height="1000" width="500" script="compassLogic">
                 <amp-story-360 id="inputCompass" layout="fill" zoom-start="1" controls="gyroscope" heading-start="-180">
-
 
                     <amp-img src="fengshui.jpg" layout="fill" alt="..." scene-heading="0deg">
                     </amp-img>
@@ -181,7 +191,15 @@
                 );
                 let signedHeading = 0;
                 function handleOrientation(event) {
+
+
+
                     const compassDirection = Math.abs(event.alpha);
+                            const manualDirection = ampState['manualDirection']['angle'];
+                    const finalDirection = manualDirection !== undefined ? manualDirection : compassDirection;
+                    const signedHeading = convertToSignedHeading(finalDirection);
+                 
+
                     function convertToSignedHeading(alpha) {
                         signedHeading = alpha;
                         if (signedHeading < -180) {
@@ -191,11 +209,18 @@
                         console.log(signedHeading)
                     }
                     convertToSignedHeading(compassDirection);
+
                     const ampStory360 = document.querySelector('#inputCompass');
                     ampStory360.setAttribute('scene-heading', signedHeading);
                     console.log(ampStory360)
                 }
+    function handleOrientation(event) {
 
+
+
+        const amp360 = document.querySelector('amp-360');
+        amp360.setAttribute('rotation', rotationOffset + 'deg');
+    }
 
             </script>
         </amp-story-page>
