@@ -193,6 +193,7 @@
 
                 function handleOrientation(event) {
                     const compassDirection = Math.abs(event.alpha);
+                    console.log(compassDirection)
                     const finalDirection = compassDirection - 180;
                     if (compassDirection < -180) {
                         compassDirection += 360;
