@@ -173,9 +173,9 @@
 
             <amp-script data-ampdevmode layout="fixed" height="1000" width="500" script="compassLogic">
                 <amp-story-360 id="inputCompass" layout="fill" zoom-start="1" heading-start="135" pitch-start="-10"
-                    eading-end="-135" pitch-end="-20" controls="gyroscope" duration="3s">
+                    eading-end="-135" pitch-end="-20" controls="gyroscope" duration="3s" src="fengshui.jpg">
 
-                    <amp-img class="classyimage" layout="fill" src="fengshui.jpg"></amp-img>
+    
 
                     <amp-img placeholder src="test.jpg" layout="fill" alt="...">
                     </amp-img>
@@ -186,38 +186,19 @@
                 console.log(document.body)
                 //    function exportFunction(name, function) { } 
                 console.log("things")
-
-                const newDirection = document.querySelector("#inputCompass");
-                console.log(newDirection)
-                window.addEventListener('deviceorientationabsolute', handleOrientation);
-                function handleOrientation(event) {
-                    const compassDirection = event.alpha;
-
-                    if (compassDirection !== null && compassDirection !== undefined) {
-                        // Update the DOM element with the compass 
-
-
-                        const newImage = document.querySelector(".classyimage")
-                        JSONDirection = JSON.parse(compassDirection);
-                        newDirection.setAttribute("scene-heading", compassDirection);
-                        console.log(newDirection);
-                        console.log(`Compass Direction: ${compassDirection}°`);
-                        return compassDirection;
-                        location.reload()
-                        /*                       async function myFunction() {
-                                                   AMP.setState({ 'compassy': compassDirection.scene - heading });
-                                                   let compassy = await AMP.getState('compassy');
-                       
-                                                   exportFunction('handleOrientation', handleOrientation)
-                                                       window.removeEventListener('deviceorientationabsolute', handleOrientation);
-                                                 
-                                               }
-                              */
-
+                document.addEventListener('DOMContentLoaded', function () {
+                    if (window.DeviceOrientationEvent) {
+                        window.addEventListener('deviceorientationabsolute', handleOrientation, true);
                     }
+                });
+
+                function handleOrientation(event) {
+                    const compassDirection = event.webkitCompassHeading || Math.abs(event.alpha);
+
+                    const ampStory360 = document.querySelector('amp-story-360');
+                    ampStory360.setAttribute('scene-heading', compassDirection)
+                    ampStory360.setAttribute("src","fengshui.jpg");
                 }
-
-
 
             </script>
         </amp-story-page>
