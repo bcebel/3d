@@ -167,15 +167,15 @@
             <input type="number" id="manualDirectionInput" min="-180" max="180" step="1">
             <button onclick="setManualDirection()">Set Direction</button>
             <amp-script data-ampdevmode layout="fixed" height="1000" width="500" script="compassLogic">
-                            <amp-state id="compassData">
-                                <script type="application/json">
+                <amp-state id="compassData">
+                    <script type="application/json">
                                 {
                                   "compassNumber": 0
                                 }
                               </script>
-                            </amp-state>
+                </amp-state>
                 <amp-story-360 id="inputCompass" layout="fill" zoom-start="2" controls="gyroscope"
-                    scene-heading="[compassData.compassNumber]">
+                    scene-heading [text]="[compassData.compassNumber]">
 
                     <amp-img src="fengshui.jpg" layout="fill">
                     </amp-img>
