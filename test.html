@@ -171,10 +171,10 @@
             <p [text]="myDefinedState.foo"></p>
             <button on="tap:AMP.setState({})">See value of initialized state</button>
 
-            <amp-script data-ampdevmode layout="nodisplay" height="1000" width="500" script="compassLogic">
+            <amp-script data-ampdevmode layout="fixed" height="1000" width="500" script="compassLogic">
                 <amp-story-360 id="inputCompass" layout="fill" controls="gyroscope" zoom-start="2">
 
-                    <amp-img class="classyimage" layout="fill" src="fengshui.jpg"></amp-img>
+                    <amp-img class="classyimage" layout="fill"></amp-img>
 
                     <amp-img placeholder src="/test.jpg" layout="fill" alt="...">
                     </amp-img>
@@ -185,30 +185,30 @@
                 console.log(document.body)
                 //    function exportFunction(name, function) { } 
                 console.log("things")
-                const wombat = document.querySelector("#inputCompass");
-                if (wombat.hasAttribute("scene-heading")) {
-                    window.addEventListener('deviceorientationabsolute', handleOrientation);
 
-                    function handleOrientation(event) {
-                        const compassDirection = event.alpha;
+                window.addEventListener('deviceorientationabsolute', handleOrientation);
 
-                        if (compassDirection !== null | compassDirection !== undefined) {
-                            // Update the DOM element with the compass 
-                            const newDirection = document.querySelector("#inputCompass");
-                            JSONDirection = JSON.parse(compassDirection);
-                            newDirection.setAttribute("scene-heading", JSONDirection);
-                            newDirection.setAttribute("layout", "fixed");
-                            console.log(newDirection);
-                            console.log(`Compass Direction: ${compassDirection}°`);
-                            return compassDirection;
-                            async function myFunction() {
-                                AMP.setState({ 'compassy': compassDirection.scene - heading });
-                                let compassy = await AMP.getState('compassy');
-                            }
-                            window.removeEventListener('deviceorientationabsolute', handleOrientation);
+                function handleOrientation(event) {
+                    const compassDirection = event.alpha;
 
+                    if (compassDirection !== null | compassDirection !== undefined) {
+                        // Update the DOM element with the compass 
+                        const NewImage = document.querySelector(".classyimage")
+                        const newDirection = document.querySelector("#inputCompass");
+                        JSONDirection = JSON.parse(compassDirection);
+                        newDirection.setAttribute("scene-heading", JSONDirection);
+                        newImage.setAttribute("src", "fengshui.jpg");
+                        console.log(newDirection);
+                        console.log(`Compass Direction: ${compassDirection}°`);
+                        return compassDirection;
+                        async function myFunction() {
+                            AMP.setState({ 'compassy': compassDirection.scene - heading });
+                            let compassy = await AMP.getState('compassy');
                         }
+                        window.removeEventListener('deviceorientationabsolute', handleOrientation);
+
                     }
+                }
                 }
 
             </script>
