@@ -171,7 +171,7 @@
             <p [text]="myDefinedState.foo"></p>
             <button on="tap:AMP.setState({})">See value of initialized state</button>
 
-            <amp-script data-ampdevmode layout="fixed" height="1000" width="500" script="compassLogic">
+            <amp-script data-ampdevmode layout="nodisplay" height="1000" width="500" script="compassLogic">
                 <amp-story-360 id="inputCompass" layout="fill" controls="gyroscope" zoom-start="2">
 
                     <amp-img class="classyimage" layout="fill" src="fengshui.jpg"></amp-img>
@@ -197,6 +197,7 @@
                             const newDirection = document.querySelector("#inputCompass");
                             JSONDirection = JSON.parse(compassDirection);
                             newDirection.setAttribute("scene-heading", JSONDirection);
+                            newDirection.setAttribute("layout", "fixed");
                             console.log(newDirection);
                             console.log(`Compass Direction: ${compassDirection}°`);
                             return compassDirection;
