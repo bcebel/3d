@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <script async custom-element="amp-list" src="https://cdn.ampproject.org/v0/amp-list-0.1.js"></script>
     <script async src="https://cdn.ampproject.org/v0.js"></script>
     <meta name="amp-script-src" content="sha384-jGcZxwWYgBU0MepYPjw1WchnzHSHZHigZtRncTI-OneOsS9hJqkORv7XZffFnjSV">
     <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js">
@@ -159,19 +160,33 @@
     <amp-story standalone title="Feng Shi" publisher="bcode" publisher-logo-src="assets/AMP-Brand-White-Icon.svg"
         poster-portrait-src="assets/cover.jpg">
         <amp-story-page id="cover">
+
+<amp-state id="myDefinedState">
+    <script type="application/json">
+    {
+      "foo": "bar"
+    }
+  </script>
+</amp-state>
+<p [text]="myDefinedState.foo"></p>
+<button on="tap:AMP.setState({})">See value of initialized state</button>
+
             <amp-script data-ampdevmode layout="fixed" height="500" width="500" script="compassLogic">
                 <amp-story-360 id="inputCompass" layout="fill" controls="gyroscope" zoom-start="2">
 
                     <amp-img class="classyimage" layout="fill" src="fengshui.jpg"></amp-img>
 
+<amp-img placeholder src="/fengshui.jpg" layout="fill" alt="...">
+</amp-img>
                 </amp-story-360>
             </amp-script>
 
             <script id="compassLogic" target="amp-script">
-
+console.log(document.body)
+//    function exportFunction(name, function) { } 
                 console.log("things")
-                const wombat = document.getElementById("inputCompass");
-                if (!wombat.hasAttribute("scene-heading")) {
+                const wombat = document.querySelector("#inputCompass");
+                if (wombat.hasAttribute("scene-heading")) {
                     window.addEventListener('deviceorientationabsolute', handleOrientation);
 
                     function handleOrientation(event) {
@@ -185,7 +200,12 @@
                             console.log(newDirection);
                             console.log(`Compass Direction: ${compassDirection}°`);
                             return compassDirection;
+                                async function myFunction() {
+                                AMP.setState({ 'compassy': compassDirection.scene-heading });
+                                let compassy = await AMP.getState('compassy');
+                            }
                             window.removeEventListener('deviceorientationabsolute', handleOrientation);
+                            
                         }
                     }
                 }
