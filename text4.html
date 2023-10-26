@@ -15,25 +15,29 @@
     <div id="compassDirection"></div>
     <div id="scene-heading" scene-heading></div>
 
-    <amp-script layout="container" script="amp-script-sample" class="i-amphtml-layout-container">
-        <script type="text/plain" target="amp-script-sample">
-        const compassDirectionElement = document.getElementById('compassDirection');
-        const sceneHeadingElement = document.getElementById('scene-heading');
-
-        function handleOrientation(event) {
-          const compassDirection = event.alpha;
-
-          if (compassDirection !== null) {
-            compassDirectionElement.textContent = `Compass Direction: ${compassDirection}°`;
-
-            const sceneHeadingValue = 360 - compassDirection;
-            sceneHeadingElement.setAttribute('scene-heading', sceneHeadingValue);
-          }
-        }
-
-        window.addEventListener('deviceorientationabsolute', handleOrientation);
-      </script>
+    <amp-script layout="fixed-height" height="200" script="live-blog-script" class="sample" sandbox="allow-forms">
+      <button id="live-blog-start">Start live blog</button>
+      <div id="live-blog-area"></div>
     </amp-script>
+    
+    <script id="live-blog-script" type="text/plain" target="amp-script">
+      const button = document.getElementById('live-blog-start');
+      const blogDiv = document.getElementById('live-blog-area');
+    
+      button.addEventListener("click", () => {
+        button.setAttribute('disabled', '');
+        button.textContent = 'Live blog begun';
+        const socket = new WebSocket('wss://amp.dev/documentation/examples/api/socket/live-blog');
+    
+        socket.onmessage = event => {
+          let newDiv = document.createElement('div');
+          let time = new Date().toLocaleTimeString();
+          newDiv.innerHTML = `<span class="time">${time}: </span><span>${event.data}</span>`;
+          blogDiv.appendChild(newDiv);
+        };
+      });
+    </script>
+ 
 </body>
 
 </html>
