@@ -162,17 +162,28 @@
 
 
         <amp-story-page id="page-1">
-            <amp-state id="manualDirection">
+            <amp-state id="compassData">
                 <script type="application/json">
-                                {
-                                  "angle": 0
-                                }
-                              </script>
+    {
+      "compassNumber": 0
+    }
+  </script>
             </amp-state>
+            <amp-list width="auto" height="100" layout="fixed-height" src="https://example.com/api/data"
+                items="myData.items">
+                <template type="amp-mustache">
+                    <!-- Your template for rendering each item -->
+                    <div>
+                        {{title}}
+                    </div>
+                </template>
+            </amp-list>
+
             <input type="number" id="manualDirectionInput" min="-180" max="180" step="1">
             <button onclick="setManualDirection()">Set Direction</button>
             <amp-script data-ampdevmode layout="fixed" height="1000" width="500" script="compassLogic">
-                <amp-story-360 id="inputCompass" layout="fill" zoom-start="2" controls="gyroscope">
+                <amp-story-360 id="inputCompass" layout="fill" zoom-start="2" controls="gyroscope"
+                    scene-heading="[compassData.compassNumber]">
 
                     <amp-img src="fengshui.jpg" layout="fill">
                     </amp-img>
@@ -205,10 +216,10 @@
                         compassDirection += 360;
                     }
                     console.log(finalDirection)
-
-
-                    const ampStory360 = document.querySelector('#inputCompass');
-                    ampStory360.setAttribute('scene-heading', finalDirection);
+const compassData=document.getElementById('compassData');
+                    compassData.setAttribute('compassNumber',finalDirection);
+                    //                   const ampStory360 = document.querySelector('#inputCompass');
+                    //                   ampStory360.setAttribute('scene-heading', finalDirection);
                     console.log(ampStory360)
                     document.removeEventListener('deviceorientationabsolute', handleOrientation, true);
 
