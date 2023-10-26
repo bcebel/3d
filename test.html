@@ -172,7 +172,7 @@
             <input type="number" id="manualDirectionInput" min="-180" max="180" step="1">
             <button onclick="setManualDirection()">Set Direction</button>
             <amp-script data-ampdevmode layout="fixed" height="1000" width="500" script="compassLogic">
-                <amp-story-360 id="inputCompass" layout="fill" zoom-start="1" controls="gyroscope" heading-start="-180">
+                <amp-story-360 id="inputCompass" layout="fill" zoom-start="2" controls="gyroscope">
 
                     <amp-img src="fengshui.jpg" layout="fill" alt="..." scene-heading="0deg">
                     </amp-img>
@@ -202,7 +202,7 @@
                     ampStory360.setAttribute('scene-heading', compassDirection);
                     console.log(ampStory360)
                 }
-                
+
                 function setManualDirection() {
                     const manualDirection = document.getElementById('manualDirectionInput').value;
                     const finalManualDirection = manualDirection !== '' ? manualDirection : 0;
