@@ -174,19 +174,19 @@
                 console.log(document.body)
                 //    function exportFunction(name, function) { } 
                 console.log("things")
-                document.addEventListener('DOMContentLoaded', function () {
-                    if (window.DeviceOrientationEvent) {
-                        window.addEventListener('deviceorientationabsolute', handleOrientation, true);
-                    }
-                });
-
-                function handleOrientation(event) {
-                    const compassDirection = event.webkitCompassHeading || Math.abs(event.alpha);
-
-                    const ampStory360 = document.querySelector('amp-story-360');
-                    ampStory360.setAttribute('scene-heading', compassDirection)
-                    ampStory360.setAttribute("src","fengshui.jpg");
+           document.addEventListener('DOMContentLoaded', function () {
+                if (window.DeviceOrientationEvent) {
+                    window.addEventListener('deviceorientationabsolute', handleOrientation, true);
                 }
+            });
+
+            function handleOrientation(event) {
+                const compassDirection = event.webkitCompassHeading || Math.abs(event.alpha);
+
+                const ampStory360 = document.querySelector('#inputCompass');
+                ampStory360.setAttribute('scene-heading', compassDirection + 'deg');
+            }
+                
 
             </script>
         </amp-story-page>
