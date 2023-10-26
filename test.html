@@ -162,16 +162,15 @@
 
 
         <amp-story-page id="page-1">
-                    <amp-state id="manualDirection">
-                        <script type="application/json">
+            <amp-state id="manualDirection">
+                <script type="application/json">
                                 {
                                   "angle": 0
                                 }
                               </script>
-                    </amp-state>
-                    <input type="number" id="manualDirectionInput" min="-180" max="180" step="1">
-                    <button on="tap:AMP.setState({manualDirection: {angle: document.getElementById('manualDirectionInput').value}})">Set
-                        Direction</button>
+            </amp-state>
+            <input type="number" id="manualDirectionInput" min="-180" max="180" step="1">
+            <button onclick="setManualDirection()">Set Direction</button>
             <amp-script data-ampdevmode layout="fixed" height="1000" width="500" script="compassLogic">
                 <amp-story-360 id="inputCompass" layout="fill" zoom-start="1" controls="gyroscope" heading-start="-180">
 
@@ -184,43 +183,33 @@
                 console.log(document.body)
                 //    function exportFunction(name, function) { } 
                 console.log("things")
+
+
                 document.addEventListener('DOMContentLoaded', function () {
-                
-                        window.addEventListener('deviceorientationabsolute', handleOrientation, true);
-                    }
+
+                    window.addEventListener('deviceorientationabsolute', handleOrientation, true);
+                }
                 );
-                let signedHeading = 0;
+
                 function handleOrientation(event) {
-
-
-
                     const compassDirection = Math.abs(event.alpha);
-                            const manualDirection = ampState['manualDirection']['angle'];
-                    const finalDirection = manualDirection !== undefined ? manualDirection : compassDirection;
-                    const signedHeading = convertToSignedHeading(finalDirection);
-                 
-
-                    function convertToSignedHeading(alpha) {
-                        signedHeading = alpha;
-                        if (signedHeading < -180) {
-                            signedHeading += 360;
-                        }
-                        return signedHeading;
-                        console.log(signedHeading)
+                    const finalDirection = compassDirection - 180;
+                    if (compassDirection < -180) {
+                        compassDirection += 360;
                     }
-                    convertToSignedHeading(compassDirection);
 
                     const ampStory360 = document.querySelector('#inputCompass');
-                    ampStory360.setAttribute('scene-heading', signedHeading);
+                    ampStory360.setAttribute('scene-heading', compassDirection);
                     console.log(ampStory360)
                 }
-    function handleOrientation(event) {
+                
+                function setManualDirection() {
+                    const manualDirection = document.getElementById('manualDirectionInput').value;
+                    const finalManualDirection = manualDirection !== '' ? manualDirection : 0;
 
-
-
-        const amp360 = document.querySelector('amp-360');
-        amp360.setAttribute('rotation', rotationOffset + 'deg');
-    }
+                    const ampStory360 = document.querySelector('#inputCompass');
+                    ampStory360.setAttribute('scene-heading', finalManualDirection);
+                }
 
             </script>
         </amp-story-page>
