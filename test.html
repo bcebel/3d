@@ -187,8 +187,8 @@
                 //    function exportFunction(name, function) { } 
                 console.log("things")
 
-
-                function compass() {
+                            const newDirection = document.querySelector("#inputCompass");
+console.log(newDirection)
                     window.addEventListener('deviceorientationabsolute', handleOrientation);
                     function handleOrientation(event) {
                         const compassDirection = event.alpha;
@@ -196,12 +196,10 @@
                         if (compassDirection !== null && compassDirection !== undefined) {
                             // Update the DOM element with the compass 
 
-                            const newDirection = document.querySelector("#inputCompass");
+ 
                             const newImage = document.querySelector(".classyimage")
                             JSONDirection = JSON.parse(compassDirection);
                             newDirection.setAttribute("scene-heading", 180 - compassDirection);
-
-                            newImage.setAttribute("src", "fengshui.jpg");
                             console.log(newDirection);
                             console.log(`Compass Direction: ${compassDirection}°`);
                             return compassDirection;
@@ -219,7 +217,7 @@
                         }
                     }
                 }
-                if (typeof compassDirection === undefined) { compass() }
+
 
             </script>
         </amp-story-page>
