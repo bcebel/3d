@@ -184,13 +184,13 @@
                 //    function exportFunction(name, function) { } 
                 console.log("things")
 
-    let eventListenerActive = false;
+
                 document.addEventListener('DOMContentLoaded', function () {
 
                     window.addEventListener('deviceorientationabsolute', handleOrientation, true);
                 }
                 );
-
+        let eventListenerActive = false;
                 function handleOrientation(event) {
                       if (eventListenerActive) {
                         return; // If event listener is already active, do nothing
@@ -209,7 +209,7 @@
                     const ampStory360 = document.querySelector('#inputCompass');
                     ampStory360.setAttribute('scene-heading', finalDirection);
                     console.log(ampStory360)
-                    
+
        eventListenerActive = false; 
                 }
 
