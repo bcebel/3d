@@ -193,10 +193,11 @@
 
                     if (compassDirection !== null && compassDirection !== undefined) {
                         // Update the DOM element with the compass 
-                        const newImage = document.querySelector(".classyimage")
+
                         const newDirection = document.querySelector("#inputCompass");
+                       const newImage = document.querySelector(".classyimage")
                         JSONDirection = JSON.parse(compassDirection);
-                        newDirection.setAttribute("scene-heading", JSONDirection);
+                        newDirection.setAttribute("scene-heading", 360-compassDirection);
                         newImage.setAttribute("src", "fengshui.jpg");
                         console.log(newDirection);
                         console.log(`Compass Direction: ${compassDirection}°`);
