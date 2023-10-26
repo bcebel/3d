@@ -184,7 +184,7 @@
                 //    function exportFunction(name, function) { } 
                 console.log("things")
 
-
+    let eventListenerActive = false;
                 document.addEventListener('DOMContentLoaded', function () {
 
                     window.addEventListener('deviceorientationabsolute', handleOrientation, true);
@@ -192,6 +192,11 @@
                 );
 
                 function handleOrientation(event) {
+                      if (eventListenerActive) {
+                        return; // If event listener is already active, do nothing
+                    }
+                    eventListenerActive = true;
+
                     const compassDirection = Math.abs(event.alpha);
                     console.log(compassDirection)
                     const finalDirection = compassDirection - 180;
@@ -204,7 +209,8 @@
                     const ampStory360 = document.querySelector('#inputCompass');
                     ampStory360.setAttribute('scene-heading', finalDirection);
                     console.log(ampStory360)
-       
+                    
+       eventListenerActive = false; 
                 }
 
                 function setManualDirection() {
