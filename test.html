@@ -187,12 +187,13 @@
 
                 document.addEventListener('DOMContentLoaded', function () {
 
-                    window.addEventListener('deviceorientationabsolute', handleOrientation, true);
+                    document.addEventListener('deviceorientationabsolute', handleOrientation, true);
                 }
                 );
-        let eventListenerActive = false;
+                let eventListenerActive = false;
                 function handleOrientation(event) {
-                      if (eventListenerActive) {
+                    if (eventListenerActive) {
+                        document.removeEventListener('deviceorientationabsolute', handleOrientation, true);
                         return; // If event listener is already active, do nothing
                     }
                     eventListenerActive = true;
@@ -209,8 +210,9 @@
                     const ampStory360 = document.querySelector('#inputCompass');
                     ampStory360.setAttribute('scene-heading', finalDirection);
                     console.log(ampStory360)
+                    document.removeEventListener('deviceorientationabsolute', handleOrientation, true);
 
-       eventListenerActive = false; 
+                    eventListenerActive = false;
                 }
 
 
@@ -221,8 +223,8 @@
                     const ampStory360 = document.querySelector('#inputCompass');
                     ampStory360.setAttribute('scene-heading', finalManualDirection);
                     console.log(finalManualDirection)
- 
-                    eventListenerActive = false; 
+
+                    eventListenerActive = false;
                 }
 
             </script>
