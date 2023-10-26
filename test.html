@@ -191,7 +191,7 @@
                 function handleOrientation(event) {
                     const compassDirection = event.alpha;
 
-                    if (compassDirection !== null | compassDirection !== undefined) {
+                    if (compassDirection !== null && compassDirection !== undefined) {
                         // Update the DOM element with the compass 
                         const newImage = document.querySelector(".classyimage")
                         const newDirection = document.querySelector("#inputCompass");
