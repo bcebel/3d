@@ -198,9 +198,10 @@
                     if (compassDirection < -180) {
                         compassDirection += 360;
                     }
+                    console.log(compassDirection)
 
                     const ampStory360 = document.querySelector('#inputCompass');
-                    ampStory360.setAttribute('scene-heading', compassDirection);
+                    ampStory360.setAttribute('scene-heading', finalDirection);
                     console.log(ampStory360)
                 }
 
@@ -210,6 +211,8 @@
 
                     const ampStory360 = document.querySelector('#inputCompass');
                     ampStory360.setAttribute('scene-heading', finalManualDirection);
+                    console.log(finalManualDirection)
+
                 }
 
             </script>
