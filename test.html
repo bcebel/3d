@@ -213,6 +213,7 @@
        eventListenerActive = false; 
                 }
 
+
                 function setManualDirection() {
                     const manualDirection = document.getElementById('manualDirectionInput').value;
                     const finalManualDirection = manualDirection !== '' ? manualDirection : 0;
@@ -221,7 +222,7 @@
                     ampStory360.setAttribute('scene-heading', finalManualDirection);
                     console.log(finalManualDirection)
  
-
+                    eventListenerActive = false; 
                 }
 
             </script>
