@@ -159,25 +159,13 @@
 
     <amp-story standalone title="Feng Shi" publisher="bcode" publisher-logo-src="assets/AMP-Brand-White-Icon.svg"
         poster-portrait-src="assets/cover.jpg">
-        <amp-story-page id="cover">
 
-            <amp-state id="myDefinedState">
-                <script type="application/json">
-    {
-      "foo": "bar"
-    }
-  </script>
-            </amp-state>
-            <p [text]="myDefinedState.foo"></p>
-            <button on="tap:AMP.setState({})">See value of initialized state</button>
 
             <amp-script data-ampdevmode layout="fixed" height="1000" width="500" script="compassLogic">
-                <amp-story-360 id="inputCompass" layout="fill" zoom-start="1" heading-start="135" pitch-start="-10"
-                    eading-end="-135" pitch-end="-20" controls="gyroscope" duration="3s" src="fengshui.jpg">
-
+                <amp-story-360 id="inputCompass" layout="fill" zoom-start="1" controls="gyroscope">
     
 
-                    <amp-img placeholder src="test.jpg" layout="fill" alt="...">
+                    <amp-img src="fengshui.jpg" layout="fill" alt="..." scene-heading="0deg">
                     </amp-img>
                 </amp-story-360>
             </amp-script>
