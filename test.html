@@ -173,7 +173,7 @@
 
             <amp-script data-ampdevmode layout="fixed" height="1000" width="500" script="compassLogic">
                 <amp-story-360 id="inputCompass" layout="fill" zoom-start="1" heading-start="95" pitch-start="-10"
-                    eading-end="-45" pitch-end="-20">
+                    eading-end="-45" pitch-end="-20" control="gyroscope">
 
                     <amp-img class="classyimage" layout="fill" src="fengshui.jpg"></amp-img>
 
@@ -200,7 +200,7 @@
                             const newImage = document.querySelector(".classyimage")
                             JSONDirection = JSON.parse(compassDirection);
                             newDirection.setAttribute("scene-heading", 180 - compassDirection);
-                            newDirection.setAttribute("control", "gyroscope");
+
                             newImage.setAttribute("src", "fengshui.jpg");
                             console.log(newDirection);
                             console.log(`Compass Direction: ${compassDirection}°`);
