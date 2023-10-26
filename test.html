@@ -174,8 +174,8 @@
                                 }
                               </script>
                 </amp-state>
-                <amp-story-360 id="inputCompass" layout="fill" zoom-start="2" controls="gyroscope"
-                    scene-heading [text]="[compassData.compassNumber]">
+                <amp-story-360 id="inputCompass" layout="fill" zoom-start="2" controls="gyroscope" scene-heading
+                    [text]="[compassData.compassNumber]">
 
                     <amp-img src="fengshui.jpg" layout="fill">
                     </amp-img>
@@ -193,12 +193,9 @@
                     document.addEventListener('deviceorientationabsolute', handleOrientation, true);
                 }
                 );
-                let eventListenerActive = false;
+
                 function handleOrientation(event) {
-                    if (eventListenerActive) {
-                        document.removeEventListener('deviceorientationabsolute', handleOrientation, true);
-                        return; // If event listener is already active, do nothing
-                    }
+
                     eventListenerActive = true;
 
                     const compassDirection = Math.abs(event.alpha);
@@ -208,7 +205,7 @@
                         compassDirection += 360;
                     }
                     console.log(finalDirection)
-        
+
                     const compassData = document.getElementById('compassData');
                     compassData.setAttribute('compassNumber', finalDirection.toString());
                     //                   const ampStory360 = document.querySelector('#inputCompass');
