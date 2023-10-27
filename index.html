@@ -8,11 +8,11 @@
     <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js">
     </script>
     <script async custom-element="amp-render" src="https://cdn.ampproject.org/v0/amp-render-1.0.js"></script>
-    <meta name="amp-script-src" content="sha384-07rA16x03qXfA3tnnJROqtMoMVTbYClXeOFuBKQnpDXR3Y_RhrO8Xt3xShgmy8Om">.
-    <meta name="amp-script-src" content="sha384-P1nkZMMYBdCHP87VJsO8FVllZ_k-O_2HGLCVWjgX3mruLZsb2-NJ4M264whefprk">
+
+
     <meta name="amp-script-src" content="sha384-jGcZxwWYgBU0MepYPjw1WchnzHSHZHigZtRncTI-OneOsS9hJqkORv7XZffFnjSV">
     <meta name="amp-script-src" content="sha384-h5zWz9YZ7H8-BLZI1S4scrxhUu9rYUt8L5Kps0UCTn-v1RjhT50SC0-31e7sz0Z9">
-    <meta name="amp-script-src" content="sha384-h5zWz9YZ7H8-BLZI1S4scrxhUu9rYUt8L5Kps0UCTn-v1RjhT50SC0-31e7sz0Z9">
+<meta name="amp-script-src" content="sha384-h5zWz9YZ7H8-BLZI1S4scrxhUu9rYUt8L5Kps0UCTn-v1RjhT50SC0-31e7sz0Z9">
 
     <meta name="amp-script-src" content="sha384-h5zWz9YZ7H8-BLZI1S4scrxhUu9rYUt8L5Kps0UCTn-v1RjhT50SC0-31e7sz0Z9">
 
@@ -162,17 +162,65 @@
         poster-portrait-src="assets/cover.jpg">
 
 
-        <amp-story-page id="cover">
+        <amp-story-page id="page-1">
+            <!--          <amp-script data-ampdevmode layout="fixed" height="100" width="200" script="manualLogic">
+             <amp-state id="manualData">
+                    <script type="application/json">
+                                                                {
+                                                                  "compassNumber": 0
+                                                                }
+                                                              </script>
+                </amp-state>
+                
+                <input type="number" id="manualDirectionInput" min="-180" max="180" step="1"
+                    data-amp-bind-value="manualData.compassNumber">
+                <button on="tap:pid.hide">
 
-            <amp-story-360 id="inputCompass" layout="fill" zoom-start="2" controls="gyroscope" heading-start="0">
 
-                <amp-img id=photoTIme layout="fill" src="Group1.jpg">
-                </amp-img>
+                    Set Compass Value
+                </button>
 
-            </amp-story-360>
-
-            <amp-script layout="fixed" height="1000" width="500" script="compassLogic" target="amp-script">
             </amp-script>
+
+            <script id="manualLogic" target="amp-script" type="text/plain">
+
+                function setManualDirection() {
+                    const manualDirection = document.getElementById('manualDirectionInput').value;
+                    const finalManualDirection = manualDirection;
+
+                    const ampStory360 = document.getElementById('compassData');
+                    ANP.ampStory360.setAttribute('compassNumber', finalManualDirection.toString());
+                    console.log(finalManualDirection)
+                    console.log(ampStory360)
+
+                }
+            </script>
+
+-->
+
+            <amp-story-360 id="inputCompass" layout="fill" zoom-start="2" controls="gyroscope">
+
+                <amp-img layout="fill" id="wombats" src="fengshui.jpg">
+                </amp-img>
+            </amp-story-360>
+            <amp-script layout="fixed" height="1000" width="500" script="compassLogic" target="amp-script">
+                <button 
+                on>
+                    wombat
+                </button>
+
+                <!--               <amp-state id="compassData">
+                    <script type="application/json">
+                                {
+                                  "compassNumber": 0
+                                }
+                              </script>
+                </amp-state>
+-->
+            </amp-script>
+
+
+
             <script id="compassLogic" target="amp-script">
                 console.log(document.body)
                 window.addEventListener('deviceorientationabsolute', handleOrientation, true);
@@ -190,8 +238,34 @@
                     if (compassDirection > 292 && compassDirection <= 337) { photoCompass.setAttribute('src', 'Group8.jpg') };
                 }
             </script>
+
         </amp-story-page>
     </amp-story>
+
+
+
 </body>
 
 </html>
+
+<!--               var directions;
+                const compassDirection = document.getElementById("inputCompass");
+                compassDirection.addEventListener("deviceorientationabsolute", handleOrientation);
+                async function handleOrientation(event) {
+                    const alpha = 360
+                    console.log(alpha);
+                    directions = await AMP.getState(alpha);
+                    console.log(directions);
+                }
+                jsonCompassDirection = JSON.parse(directions).items;
+                compassDirection.setAttribute("scene-heading", jsonCompassDirection);
+
+                              console.log(compassDirection.attributes[1])
+const directions=AMP.getState(compassDirection)
+               
+jsonCompassDirection = JSON.parse(directions).items;
+                wombat.setAttribute("scene-heading", jsonCompassDirection);
+                console.log(wombat)
+
+
+-->
