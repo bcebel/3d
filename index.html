@@ -9,7 +9,7 @@
     </script>
     <script async custom-element="amp-render" src="https://cdn.ampproject.org/v0/amp-render-1.0.js"></script>
     <meta name="amp-script-src" content="sha384-07rA16x03qXfA3tnnJROqtMoMVTbYClXeOFuBKQnpDXR3Y_RhrO8Xt3xShgmy8Om">.
-
+    <meta name="amp-script-src" content="sha384-P1nkZMMYBdCHP87VJsO8FVllZ_k-O_2HGLCVWjgX3mruLZsb2-NJ4M264whefprk">
     <meta name="amp-script-src" content="sha384-jGcZxwWYgBU0MepYPjw1WchnzHSHZHigZtRncTI-OneOsS9hJqkORv7XZffFnjSV">
     <meta name="amp-script-src" content="sha384-h5zWz9YZ7H8-BLZI1S4scrxhUu9rYUt8L5Kps0UCTn-v1RjhT50SC0-31e7sz0Z9">
     <meta name="amp-script-src" content="sha384-h5zWz9YZ7H8-BLZI1S4scrxhUu9rYUt8L5Kps0UCTn-v1RjhT50SC0-31e7sz0Z9">
@@ -162,43 +162,36 @@
         poster-portrait-src="assets/cover.jpg">
 
 
-    <amp-story-page id="cover">
-   
+        <amp-story-page id="cover">
+
             <amp-story-360 id="inputCompass" layout="fill" zoom-start="2" controls="gyroscope" heading-start="0">
 
                 <amp-img id=photoTIme layout="fill" src="Group1.jpg">
                 </amp-img>
 
             </amp-story-360>
-            
+
             <amp-script layout="fixed" height="1000" width="500" script="compassLogic" target="amp-script">
             </amp-script>
-            <script id="compassLogic" target="amp-script" type="text/plain">
+            <script id="compassLogic" target="amp-script">
                 console.log(document.body)
- 
-                    window.addEventListener('deviceorientationabsolute', handleOrientation, true);
-        function handleOrientation(event) {
+                window.addEventListener('deviceorientationabsolute', handleOrientation, true);
+                function handleOrientation(event) {
                     const compassDirection = Math.abs(event.alpha);
                     console.log(compassDirection)
                     const photoCompass = document.querySelector('#photoTIme');
-if (compassDirection >337 && compassDirection <= 22) {photoCompass.setAttribute('src', 'Group1.jpg');}
-if (compassDirection >22 && compassDirection <= 67) {photoCompass.setAttribute('src', 'Group2.jpg');}
-if (compassDirection >67 && compassDirection <= 112) {photoCompass.setAttribute('src', 'Group3.jpg');}
-if (compassDirection >112 && compassDirection <= 157) {photoCompass.setAttribute('src', 'Group4.jpg');}
-if (compassDirection >157 && compassDirection <= 202) {photoCompass.setAttribute('src', 'Group5.jpg');}
-if (compassDirection >202 && compassDirection <= 247) {photoCompass.setAttribute('src', 'Group6.jpg');}
-if (compassDirection >247 && compassDirection <= 292) {photoCompass.setAttribute('src', 'Group7.jpg');}
-if (compassDirection >292 && compassDirection <= 337) {photoCompass.setAttribute('src', 'Group8.jpg');}
-
-
-                    eventListenerActive = false;
-                    document.removeEventListener('deviceorientationabsolute', handleOrientation, true);
+                    if (compassDirection > 337 && compassDirection <= 22) { photoCompass.setAttribute('src', 'Group1.jpg') };
+                    if (compassDirection > 22 && compassDirection <= 67) { photoCompass.setAttribute('src', 'Group2.jpg') };
+                    if (compassDirection > 67 && compassDirection <= 112) { photoCompass.setAttribute('src', 'Group3.jpg') };
+                    if (compassDirection > 112 && compassDirection <= 157) { photoCompass.setAttribute('src', 'Group4.jpg') };
+                    if (compassDirection > 157 && compassDirection <= 202) { photoCompass.setAttribute('src', 'Group5.jpg') };
+                    if (compassDirection > 202 && compassDirection <= 247) { photoCompass.setAttribute('src', 'Group6.jpg') };
+                    if (compassDirection > 247 && compassDirection <= 292) { photoCompass.setAttribute('src', 'Group7.jpg') };
+                    if (compassDirection > 292 && compassDirection <= 337) { photoCompass.setAttribute('src', 'Group8.jpg') };
                 }
             </script>
-    </amp-story-page>
+        </amp-story-page>
     </amp-story>
-
-
 </body>
 
 </html>
