@@ -162,47 +162,15 @@
         poster-portrait-src="assets/cover.jpg">
 
 
-        <amp-story-page id="page-1">
-            <!--          <amp-script data-ampdevmode layout="fixed" height="100" width="200" script="manualLogic">
-             <amp-state id="manualData">
-                    <script type="application/json">
-                                                                {
-                                                                  "compassNumber": 0
-                                                                }
-                                                              </script>
-                </amp-state>
-                
-                <input type="number" id="manualDirectionInput" min="-180" max="180" step="1"
-                    data-amp-bind-value="manualData.compassNumber">
-                <button on="tap:pid.hide">
+    <amp-story-page id="cover">
+   
+            <amp-story-360 id="inputCompass" layout="fill" zoom-start="2" controls="gyroscope" heading-start="0">
 
-
-                    Set Compass Value
-                </button>
-
-            </amp-script>
-
-            <script id="manualLogic" target="amp-script" type="text/plain">
-
-                function setManualDirection() {
-                    const manualDirection = document.getElementById('manualDirectionInput').value;
-                    const finalManualDirection = manualDirection;
-
-                    const ampStory360 = document.getElementById('compassData');
-                    ANP.ampStory360.setAttribute('compassNumber', finalManualDirection.toString());
-                    console.log(finalManualDirection)
-                    console.log(ampStory360)
-
-                }
-            </script>
-
--->
-
-            <amp-story-360 id="inputCompass" layout="fill" zoom-start="2" controls="gyroscope">
-
-                <amp-img id=photoTIme layout="fill">
+                <amp-img id=photoTIme layout="fill" src="Group1.jpg">
                 </amp-img>
+
             </amp-story-360>
+            
             <amp-script layout="fixed" height="1000" width="500" script="compassLogic" target="amp-script">
             </amp-script>
             <script id="compassLogic" target="amp-script" type="text/plain">
@@ -213,48 +181,24 @@
                     const compassDirection = Math.abs(event.alpha);
                     console.log(compassDirection)
                     const photoCompass = document.querySelector('#photoTIme');
-if (compassDirection >337 && compassDirection <= 22) {photoCompass.setAttribute('src', 'group 1.jpg');}
-if (compassDirection >22 && compassDirection <= 67) {photoCompass.setAttribute('src', 'group 2.jpg');}
-if (compassDirection >67 && compassDirection <= 112) {photoCompass.setAttribute('src', 'group 3.jpg');}
-if (compassDirection >112 && compassDirection <= 157) {photoCompass.setAttribute('src', 'group 4.jpg');}
-if (compassDirection >157 && compassDirection <= 202) {photoCompass.setAttribute('src', 'group 5.jpg');}
-if (compassDirection >202 && compassDirection <= 247) {photoCompass.setAttribute('src', 'group 6.jpg');}
-if (compassDirection >247 && compassDirection <= 292) {photoCompass.setAttribute('src', 'group 7.jpg');}
-if (compassDirection >292 && compassDirection <= 337) {photoCompass.setAttribute('src', 'group 8.jpg');}
+if (compassDirection >337 && compassDirection <= 22) {photoCompass.setAttribute('src', 'Group1.jpg');}
+if (compassDirection >22 && compassDirection <= 67) {photoCompass.setAttribute('src', 'Group2.jpg');}
+if (compassDirection >67 && compassDirection <= 112) {photoCompass.setAttribute('src', 'Group3.jpg');}
+if (compassDirection >112 && compassDirection <= 157) {photoCompass.setAttribute('src', 'Group4.jpg');}
+if (compassDirection >157 && compassDirection <= 202) {photoCompass.setAttribute('src', 'Group5.jpg');}
+if (compassDirection >202 && compassDirection <= 247) {photoCompass.setAttribute('src', 'Group6.jpg');}
+if (compassDirection >247 && compassDirection <= 292) {photoCompass.setAttribute('src', 'Group7.jpg');}
+if (compassDirection >292 && compassDirection <= 337) {photoCompass.setAttribute('src', 'Group8.jpg');}
 
 
                     eventListenerActive = false;
                     document.removeEventListener('deviceorientationabsolute', handleOrientation, true);
                 }
-
             </script>
-        </amp-story-page>
+    </amp-story-page>
     </amp-story>
-
 
 
 </body>
 
 </html>
-
-<!--               var directions;
-                const compassDirection = document.getElementById("inputCompass");
-                compassDirection.addEventListener("deviceorientationabsolute", handleOrientation);
-                async function handleOrientation(event) {
-                    const alpha = 360
-                    console.log(alpha);
-                    directions = await AMP.getState(alpha);
-                    console.log(directions);
-                }
-                jsonCompassDirection = JSON.parse(directions).items;
-                compassDirection.setAttribute("scene-heading", jsonCompassDirection);
-
-                              console.log(compassDirection.attributes[1])
-const directions=AMP.getState(compassDirection)
-               
-jsonCompassDirection = JSON.parse(directions).items;
-                wombat.setAttribute("scene-heading", jsonCompassDirection);
-                console.log(wombat)
-
-
--->
