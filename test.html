@@ -179,7 +179,7 @@
                 </button>
 -->
             </amp-script>
-    
+
             <script id="manualLogic" target="amp-script" type="text/plain">
 
                 function setManualDirection() {
@@ -187,7 +187,7 @@
                     const finalManualDirection = manualDirection;
 
                     const ampStory360 = document.getElementById('compassData');
-                    ampStory360.setAttribute('compassNumber', finalManualDirection.toString());
+                    ANP.ampStory360.setAttribute('compassNumber', finalManualDirection.toString());
                     console.log(finalManualDirection)
                     console.log(ampStory360)
 
@@ -209,7 +209,7 @@
                 <amp-story-360 id="inputCompass" layout="fill" zoom-start="2" controls="gyroscope"
                     data-amp-bind-scene-heading="[compassData.compassNumber]">
 
-                    <amp-img layout="fill" id="wombats" src="fengshui.jpg">
+                    <amp-img layout="fill" id="wombats">
                     </amp-img>
                 </amp-story-360>
 
@@ -242,10 +242,10 @@
 //                    const compassData = document.getElementById('compassData');
 //                    compassData.setAttribute('compassNumber', finalDirection.toString());
                     const ampStory360 = document.querySelector('#inputCompass');
-                    ampStory360.setAttribute('scene-heading', finalDirection);
+                    AMP.ampStory360.setAttribute('scene-heading', finalDirection);
                     console.log(compassData)
                     const pho= document.querySelector('#wombats');
-                    pho.setAttribute('src', 'fengshui.jpg');
+                    AMP.pho.setAttribute('src', 'fengshui.jpg');
 
                     const check = document.getElementById('inputCompass')
 
