@@ -12,7 +12,7 @@
 
     <meta name="amp-script-src" content="sha384-jGcZxwWYgBU0MepYPjw1WchnzHSHZHigZtRncTI-OneOsS9hJqkORv7XZffFnjSV">
     <meta name="amp-script-src" content="sha384-h5zWz9YZ7H8-BLZI1S4scrxhUu9rYUt8L5Kps0UCTn-v1RjhT50SC0-31e7sz0Z9">
-<meta name="amp-script-src" content="sha384-h5zWz9YZ7H8-BLZI1S4scrxhUu9rYUt8L5Kps0UCTn-v1RjhT50SC0-31e7sz0Z9">
+    <meta name="amp-script-src" content="sha384-h5zWz9YZ7H8-BLZI1S4scrxhUu9rYUt8L5Kps0UCTn-v1RjhT50SC0-31e7sz0Z9">
 
     <meta name="amp-script-src" content="sha384-h5zWz9YZ7H8-BLZI1S4scrxhUu9rYUt8L5Kps0UCTn-v1RjhT50SC0-31e7sz0Z9">
 
@@ -200,12 +200,11 @@
 
             <amp-story-360 id="inputCompass" layout="fill" zoom-start="2" controls="gyroscope">
 
-                <amp-img layout="fill" id="wombats" src="fengshui.jpg">
+                <amp-img id="photoTime layout=" fill" id="wombats">
                 </amp-img>
             </amp-story-360>
             <amp-script layout="fixed" height="1000" width="500" script="compassLogic" target="amp-script">
-                <button 
-                on>
+                <button on>
                     wombat
                 </button>
 
@@ -227,7 +226,7 @@
                 function handleOrientation(event) {
                     const compassDirection = Math.abs(event.alpha);
                     console.log(compassDirection)
-                    const photoCompass = document.querySelector('#photoTIme');
+                    const photoCompass = document.querySelector('#photoTime');
                     if (compassDirection > 337 && compassDirection <= 22) { photoCompass.setAttribute('src', 'Group1.jpg') };
                     if (compassDirection > 22 && compassDirection <= 67) { photoCompass.setAttribute('src', 'Group2.jpg') };
                     if (compassDirection > 67 && compassDirection <= 112) { photoCompass.setAttribute('src', 'Group3.jpg') };
