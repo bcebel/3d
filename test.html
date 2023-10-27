@@ -172,8 +172,9 @@
                 </amp-state>
                 <input type="number" id="manualDirectionInput" min="-180" max="180" step="1"
                     data-amp-bind-value="manualData.compassNumber">
-                <button
-                    on="tap:AMP.setState({manualData: {compassNumber: document.getElementById('manualDirectionInput').value}})">
+                <button on:tap:inputCompass.setAttribute("scene-heading", manualDirectionInput)>
+
+
                     Set Compass Value
                 </button>
             </amp-script>
@@ -207,7 +208,7 @@
                 <amp-story-360 id="inputCompass" layout="fill" zoom-start="2" controls="gyroscope"
                     data-amp-bind-scene-heading="[compassData.compassNumber]">
 
-                    <amp-img src="fengshui.jpg" layout="fill">
+                    <amp-img layout="fill" id="wombats">
                     </amp-img>
                 </amp-story-360>
 
@@ -239,9 +240,11 @@
 
                     const compassData = document.getElementById('compassData');
                     compassData.setAttribute('compassNumber', finalDirection.toString());
-                    //                   const ampStory360 = document.querySelector('#inputCompass');
-                    //                   ampStory360.setAttribute('scene-heading', finalDirection);
+                    const ampStory360 = document.querySelector('#inputCompass');
+                    ampStory360.setAttribute('scene-heading', finalDirection);
                     console.log(compassData)
+                    const pho= document.querySelector('#wombats');
+                    pho.setAttribute('src', 'fengshui.jpg');
 
                     const check = document.getElementById('inputCompass')
 
