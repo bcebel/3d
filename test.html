@@ -156,7 +156,6 @@
 </head>
 
 <body>
-
     <amp-story standalone title="Feng Shi" publisher="bcode" publisher-logo-src="assets/AMP-Brand-White-Icon.svg"
         poster-portrait-src="assets/cover.jpg">
 
@@ -170,15 +169,17 @@
                                                                 }
                                                               </script>
                 </amp-state>
-                -->
+                
                 <input type="number" id="manualDirectionInput" min="-180" max="180" step="1"
                     data-amp-bind-value="manualData.compassNumber">
-                <button on:tap:inputCompass.setAttribute("scene-heading", manualDirectionInput)>
+                <button on="tap:pid.hide">
 
 
                     Set Compass Value
                 </button>
+-->
             </amp-script>
+    
             <script id="manualLogic" target="amp-script" type="text/plain">
 
                 function setManualDirection() {
@@ -195,7 +196,6 @@
 
 
 
-
             <amp-script data-ampdevmode layout="fixed" height="1000" width="500" script="compassLogic">
 
                 <!--               <amp-state id="compassData">
@@ -209,7 +209,7 @@
                 <amp-story-360 id="inputCompass" layout="fill" zoom-start="2" controls="gyroscope"
                     data-amp-bind-scene-heading="[compassData.compassNumber]">
 
-                    <amp-img layout="fill" id="wombats">
+                    <amp-img layout="fill" id="wombats" src="fengshui.jpg">
                     </amp-img>
                 </amp-story-360>
 
