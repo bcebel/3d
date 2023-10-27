@@ -163,13 +163,14 @@
 
         <amp-story-page id="page-1">
             <amp-script data-ampdevmode layout="fixed" height="100" width="200" script="manualLogic">
-                <amp-state id="manualData">
+                <!--              <amp-state id="manualData">
                     <script type="application/json">
                                                                 {
                                                                   "compassNumber": 0
                                                                 }
                                                               </script>
                 </amp-state>
+                -->
                 <input type="number" id="manualDirectionInput" min="-180" max="180" step="1"
                     data-amp-bind-value="manualData.compassNumber">
                 <button on:tap:inputCompass.setAttribute("scene-heading", manualDirectionInput)>
@@ -197,14 +198,14 @@
 
             <amp-script data-ampdevmode layout="fixed" height="1000" width="500" script="compassLogic">
 
-                <amp-state id="compassData">
+                <!--               <amp-state id="compassData">
                     <script type="application/json">
                                 {
                                   "compassNumber": 0
                                 }
                               </script>
                 </amp-state>
-
+-->
                 <amp-story-360 id="inputCompass" layout="fill" zoom-start="2" controls="gyroscope"
                     data-amp-bind-scene-heading="[compassData.compassNumber]">
 
