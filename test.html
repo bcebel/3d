@@ -163,39 +163,40 @@
 
         <amp-story-page id="page-1">
             <amp-script data-ampdevmode layout="fixed" height="100" width="200" script="manualLogic">
-                                <amp-state id="manualData">
-                                    <script type="application/json">
+                <amp-state id="manualData">
+                    <script type="application/json">
                                                                 {
                                                                   "compassNumber": 0
                                                                 }
                                                               </script>
-                                </amp-state>
-        <input type="number" id="manualDirectionInput" min="-180" max="180" step="1"
-            data-amp-bind-value="manualData.compassNumber">
-    <button on="tap:AMP.setState({manualData: {compassNumber: document.getElementById('manualDirectionInput').value}})">
-        Set Compass Value
-    </button>
-        </amp-script>
-        <script id="manualLogic" target="amp-script">
+                </amp-state>
+                <input type="number" id="manualDirectionInput" min="-180" max="180" step="1"
+                    data-amp-bind-value="manualData.compassNumber">
+                <button
+                    on="tap:AMP.setState({manualData: {compassNumber: document.getElementById('manualDirectionInput').value}})">
+                    Set Compass Value
+                </button>
+            </amp-script>
+            <script id="manualLogic" target="amp-script">
 
                 function setManualDirection() {
-                const manualDirection = document.getElementById('manualDirectionInput').value;
-                const finalManualDirection = manualDirection;
-                
-                const ampStory360 = document.getElementById('compassData');
-                ampStory360.setAttribute('compassNumber', finalManualDirection);
-                console.log(finalManualDirection)
-                console.log(ampStory360)
-                
-         const compassNumber = document.getElementById('manualData');
-                cumpassNumber.setAttribute('compassNumber', finalManualDirection);
-                </script>
+                    const manualDirection = document.getElementById('manualDirectionInput').value;
+                    const finalManualDirection = manualDirection;
+
+                    const ampStory360 = document.getElementById('compassData');
+                    ampStory360.setAttribute('compassNumber', finalManualDirection);
+                    console.log(finalManualDirection)
+                    console.log(ampStory360)
+
+                    const compassNumber = document.getElementById('manualData');
+                    compassNumber.setAttribute('compassNumber', finalManualDirection);
+            </script>
 
 
 
-  
+
             <amp-script data-ampdevmode layout="fixed" height="1000" width="500" script="compassLogic">
-                
+
                 <amp-state id="compassData">
                     <script type="application/json">
                                 {
@@ -203,51 +204,51 @@
                                 }
                               </script>
                 </amp-state>
-                
+
                 <amp-story-360 id="inputCompass" layout="fill" zoom-start="2" controls="gyroscope"
                     data-amp-bind-scene-heading="[compassData.compassNumber]">
 
                     <amp-img src="fengshui.jpg" layout="fill">
                     </amp-img>
                 </amp-story-360>
-                
+
             </amp-script>
 
             <script id="compassLogic" target="amp-script">
-                console.log(document.body)
-                //    function exportFunction(name, function) { } 
-                console.log("things")
+                    console.log(document.body)
+                    //    function exportFunction(name, function) { } 
+                    console.log("things")
 
 
-                document.addEventListener('DOMContentLoaded', function () {
+                    document.addEventListener('DOMContentLoaded', function () {
 
-                    window.addEventListener('deviceorientationabsolute', handleOrientation, true);
-                }
-                );
-
-                function handleOrientation(event) {
-
-                    eventListenerActive = true;
-
-                    const compassDirection = Math.abs(event.alpha);
-                    console.log(compassDirection)
-                    const finalDirection = compassDirection - 180;
-                    if (compassDirection < -180) {
-                        compassDirection += 360;
+                        window.addEventListener('deviceorientationabsolute', handleOrientation, true);
                     }
-                    console.log(finalDirection)
+                    );
 
-                    const compassData = document.getElementById('compassData');
-                    compassData.setAttribute('compassNumber', finalDirection.toString());
-                    //                   const ampStory360 = document.querySelector('#inputCompass');
-                    //                   ampStory360.setAttribute('scene-heading', finalDirection);
-                    console.log(compassData)
-                    document.removeEventListener('deviceorientationabsolute', handleOrientation, true);
-                    const check = document.getElementById('inputCompass')
+                    function handleOrientation(event) {
 
-                    console.log(check);
-                    eventListenerActive = false;
-                }
+                        eventListenerActive = true;
+
+                        const compassDirection = Math.abs(event.alpha);
+                        console.log(compassDirection)
+                        const finalDirection = compassDirection - 180;
+                        if (compassDirection < -180) {
+                            compassDirection += 360;
+                        }
+                        console.log(finalDirection)
+
+                        const compassData = document.getElementById('compassData');
+                        compassData.setAttribute('compassNumber', finalDirection.toString());
+                        //                   const ampStory360 = document.querySelector('#inputCompass');
+                        //                   ampStory360.setAttribute('scene-heading', finalDirection);
+                        console.log(compassData)
+                        document.removeEventListener('deviceorientationabsolute', handleOrientation, true);
+                        const check = document.getElementById('inputCompass')
+
+                        console.log(check);
+                        eventListenerActive = false;
+                    }
 
             </script>
         </amp-story-page>
