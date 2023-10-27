@@ -207,12 +207,9 @@
             </amp-script>
             <script id="compassLogic" target="amp-script" type="text/plain">
                 console.log(document.body)
-                document.addEventListener('DOMContentLoaded', function () {
+ 
                     window.addEventListener('deviceorientationabsolute', handleOrientation, true);
-                }
-                );
-
-                function handleOrientation(event) {
+        function handleOrientation(event) {
                     const compassDirection = Math.abs(event.alpha);
                     console.log(compassDirection)
                     const photoCompass = document.querySelector('#photoTIme');
@@ -225,9 +222,7 @@ if (compassDirection >202 && compassDirection <= 247) {photoCompass.setAttribute
 if (compassDirection >247 && compassDirection <= 292) {photoCompass.setAttribute('src', 'group 7.jpg');}
 if (compassDirection >292 && compassDirection <= 337) {photoCompass.setAttribute('src', 'group 8.jpg');}
 
-                    const check = document.getElementById('inputCompass')
 
-                    console.log(check);
                     eventListenerActive = false;
                     document.removeEventListener('deviceorientationabsolute', handleOrientation, true);
                 }
