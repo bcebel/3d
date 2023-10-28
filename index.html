@@ -224,7 +224,7 @@
                         console.log(compassDirection)
                         const photoCompass = document.querySelector('#photoTime');
 
-                        if (photoCompass.getAttribute('src') === "undefined") {
+                        if (photoCompass.getAttribute('src')) {return} else {
 
                             if (compassDirection > 337 || compassDirection <= 22) {
                                 photoCompass.setAttribute('src', '6.jpg');
@@ -267,7 +267,7 @@
                                 setTimeout(() => { }, 100000)
                             };
                             location.reload()
-                        } else return
+                        }
                     }
                 });
             </script>
