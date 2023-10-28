@@ -215,16 +215,17 @@
             </amp-script>
             <script id="compassLogic" target="amp-script">
                 console.log(document.body)
-                document.addEventListener('DOMContentLoaded', function () {
-                    // Your code here
+                function oneTime() {
+                    document.addEventListener('DOMContentLoaded', function () {
+                        // Your code here
 
-                    window.addEventListener('deviceorientationabsolute', handleOrientation, true);
-                    function handleOrientation(event) {
-                        const compassDirection = (event.alpha);
-                        console.log(compassDirection)
-                        const photoCompass = document.querySelector('#photoTime');
+                        window.addEventListener('deviceorientationabsolute', handleOrientation, true);
+                        function handleOrientation(event) {
+                            const compassDirection = (event.alpha);
+                            console.log(compassDirection)
+                            const photoCompass = document.querySelector('#photoTime');
 
-                        if (photoCompass.getAttribute('src')) {return} else {
+
 
                             if (compassDirection > 337 || compassDirection <= 22) {
                                 photoCompass.setAttribute('src', '6.jpg');
@@ -266,10 +267,13 @@
                                 console.log(photoCompass)
                                 setTimeout(() => { }, 100000)
                             };
-                            location.reload()
+
                         }
                     }
-                });
+                    )
+                    location.reload();
+                };
+                oneTime();
             </script>
 
         </amp-story-page>
