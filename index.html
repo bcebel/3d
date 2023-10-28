@@ -200,13 +200,10 @@
 
             <amp-story-360 id="inputCompass" layout="fill" zoom-start="2" controls="gyroscope">
 
-                <amp-img id="photoTime" layout=" fill" id="wombats">
+                <amp-img id="photoTime" layout=" fill">
                 </amp-img>
             </amp-story-360>
             <amp-script layout="fixed" height="1000" width="500" script="compassLogic" target="amp-script">
-                <button on>
-                    wombat
-                </button>
 
                 <!--               <amp-state id="compassData">
                     <script type="application/json">
@@ -217,9 +214,6 @@
                 </amp-state>
 -->
             </amp-script>
-
-
-
             <script id="compassLogic" target="amp-script">
                 console.log(document.body)
                 window.addEventListener('deviceorientationabsolute', handleOrientation, true);
