@@ -2,6 +2,7 @@
 <html amp lang="en">
 
 <head>
+    <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
     <script async custom-element="amp-list" src="https://cdn.ampproject.org/v0/amp-list-0.1.js"></script>
     <script async src="https://cdn.ampproject.org/v0.js"></script>
     <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js">
@@ -150,9 +151,10 @@
 </head>
 
 <body>
+
+
     <amp-story standalone title="Feng Shi" publisher="bcode" publisher-logo-src="assets/AMP-Brand-White-Icon.svg"
         poster-portrait-src="assets/cover.jpg">
-
 
         <amp-story-page id="page-1">
             <!--          <amp-script data-ampdevmode layout="fixed" height="100" width="200" script="manualLogic">
@@ -190,12 +192,17 @@
 
 -->
 
+
+
             <amp-story-360 id="inputCompass" layout="fill" zoom-start="2" controls="gyroscope">
 
-                <amp-img placeholder src="1.jpg" id="photoTime" layout="fill">
+                <amp-img placeholder src="1.jpg" id="photoTime" layout="fill" scene-heading="0">
                 </amp-img>
             </amp-story-360>
+
             <amp-script layout="fixed" height="1000" width="500" script="compassLogic" target="amp-script">
+
+                <button on="tap:">things</button>
 
                 <!--               <amp-state id="compassData">
                     <script type="application/json">
