@@ -170,6 +170,7 @@
             <script id="compassLogic" target="amp-script">
                 console.log(document.body)
                 document.getElementById('setCompassButton').addEventListener('click', function () {
+                    console.log('click')
                     document.addEventListener('DOMContentLoaded', function () {
                         window.addEventListener('deviceorientationabsolute', handleOrientation, true);
 
