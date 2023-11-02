@@ -160,14 +160,15 @@
 
             <amp-story-360 id="inputCompass" layout="fill" zoom-start="2" controls="gyroscope">
 
-                <amp-img id="photoTime" layout="fill" scene-heading="0">
+                <amp-img src="" id="photoTime" layout="fill" scene-heading="0">
                 </amp-img>
             </amp-story-360>
 
             <amp-script layout="fixed" height="1000" width="500" script="compassLogic" target="amp-script">
-                <button id="setCompassButton">Set Compass Direction</button>
+                <button on="tap:setCompassButton"   id="setCompassButton">Set Compass Direction</button>
             </amp-script>
-            <script id="compassLogic" target="amp-script">
+
+            <script id="compassLogic" target="amp-script"></script>
                 console.log(document.body)
                 document.getElementById('setCompassButton').addEventListener('click', function () {
                     console.log('click')
