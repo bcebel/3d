@@ -140,7 +140,8 @@
         publisher-logo-src="assets/AMP-Brand-White-Icon.svg" poster-portrait-src="assets/cover.jpg">
 
         <amp-story-page id="cover">
-
+            <amp-script src="js/validate.js" layout="fixed" height="500" width="750">
+            </amp-script>
             <amp-story-360 layout="fill" heading-start="-160" controls="gyroscope">
 
                 <amp-img id="photoTime" layout="fill" src="1.jpg"></amp-img>
@@ -148,14 +149,13 @@
 
         </amp-story-page>
 
-        <!-- Page 1 (Cat): 1 layer (vertical) -->
 
 
         <!-- Bookend -->
         <amp-story-bookend src="bookend.json" layout="nodisplay"></amp-story-bookend>
+
     </amp-story>
-    <amp-script src="js/validate.js" layout="fixed" height="500" width="750">
-    </amp-script>
+
 </body>
 
 </html>
