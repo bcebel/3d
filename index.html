@@ -108,7 +108,7 @@
             font-weight: normal;
             font-size: 1.3em;
             line-height: 1.5em;
-            color: #fff;
+            color: green;
         }
 
         q {
@@ -155,17 +155,52 @@
 
     <amp-story standalone title="Feng Shi" publisher="bcode" publisher-logo-src="assets/AMP-Brand-White-Icon.svg"
         poster-portrait-src="assets/cover.jpg">
+<amp-story-page id="cover">
+    <amp-story-grid-layer template="fill">
+        <amp-img src="assets/cover.jpg" width="720" height="1280" layout="responsive">
+        </amp-img>
+    </amp-story-grid-layer>
+    <amp-story-grid-layer template="vertical">
+        <!-- The "change" event of this <input> element contains
+             a "value" variable that can be referenced via "event.value". -->
+        <select on="change:AMP.setState({ option: event.value })">
+            <option value="0">No selection</option>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+        </select>
+        <div hidden [hidden]="option != 1">
+            Option 1
+        </div>
+        <div hidden [hidden]="option != 2">
+            Option 2
+        </div>
+        <h1>3D Feng Shui</h1>
+        <p>By bcoderr</p>
+    </amp-story-grid-layer>
+</amp-story-page>
 
         <amp-story-page id="page-1">
-
+            <amp-state id="compassData">
+                <script type="application/json">
+                    {
+                        "compassNumber": 0
+                    }
+                </script>
+            </amp-state>
             <amp-story-360 id="inputCompass" layout="fill" zoom-start="2" controls="gyroscope">
 
-                <amp-img src="" id="photoTime" layout="fill" scene-heading="0">
+                <amp-img src="intro.png" id="photoTime" layout="fill" scene-heading="0">
                 </amp-img>
+                
             </amp-story-360>
 
             <amp-script layout="fixed" height="1000" width="500" script="compassLogic" target="amp-script">
-                <button on="tap:setCompassButton"   id="setCompassButton">Set Compass Direction</button>
+        <button on="tap:AMP.setState({ src: 7.jpg })">
+            Controls
+        </button>
+        <button on="tap:AMP.setState({ src: 6.jpg })">
+            No Controls
+        </button>
             </amp-script>
 
             <script id="compassLogic" target="amp-script"></script>
@@ -180,11 +215,22 @@
                             console.log(compassDirection)
                             const photoCompass = document.querySelector('#photoTime');
 
+                    function setCompassDirection(direction) {
+                    AMP.setState({
+                    compassData: {
+                    compassNumber: direction
+                    }
+                    });
+                    }
+                    setCompassDirection(compassDirection)
+console.log(AMP.getState('compassData'));
+
                             if (compassDirection > 337 || compassDirection <= 22) {
                                 photoCompass.setAttribute('src', '6.jpg');
                                 console.log(photoCompass)
 
                             };
+
                             if (compassDirection > 22 && compassDirection <= 67) {
                                 photoCompass.setAttribute('src', '5.jpg')
                                 console.log(photoCompass)
@@ -228,6 +274,43 @@
             </script>
         </amp-story-page>
     </amp-story>
+
+<!--
+    <amp-state id="myUpdateState">
+        <script type="application/json">
+        {
+          "foo": "bar",
+          "baz": "hello"
+        }
+      </script>
+    </amp-state>
+    <p [text]="myUpdateState.foo"></p>
+    <p [text]="myUpdateState.baz"></p>
+    <button on="tap:AMP.setState({})">See value of set state</button>
+
+
+
+
+    <button on="tap:AMP.setState({myUpdateState:{baz: myUpdateState.foo}})">
+        Set value of baz to value of foo
+    </button>
+    <button on="tap:AMP.setState({myUpdateState:{baz: 'world'}})">
+        Set value of baz to "world"
+    </button>
+<amp-list width="auto" height="100" layout="fixed-height" src="amp-list-urls.json">
+    <template type="amp-mustache">
+
+        <div class="url-entry">
+            <a href="{{url}}">{{title}}</a>
+        </div>
+    </template>
+</amp-list>
+amp-list div[role='list'] {
+display: grid;
+grid-gap: 0.5em;
+}
+
+-->
 </body>
 
 </html>
