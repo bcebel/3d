@@ -21,41 +21,47 @@ document.addEventListener("DOMContentLoaded", function () {
     if (compassDirection > 337 || compassDirection <= 22) {
       photoCompass.setAttribute("src", "6.jpg");
       console.log(photoCompass);
-      window.location.href = "home.html";
-
+      window.location.href = "home.html#six";
     }
 
     if (compassDirection > 22 && compassDirection <= 67) {
       photoCompass.setAttribute("src", "5.jpg");
       console.log(photoCompass);
+      window.location.href = "home.html#five";
     }
 
     if (compassDirection > 67 && compassDirection <= 112) {
       photoCompass.setAttribute("src", "4.jpg");
       console.log(photoCompass);
+      window.location.href = "home.html#four";
     }
 
     if (compassDirection > 112 && compassDirection <= 157) {
       photoCompass.setAttribute("src", "3.jpg");
       console.log(photoCompass);
+      window.location.href = "home.html#three";
     }
 
     if (compassDirection > 157 && compassDirection <= 202) {
       photoCompass.setAttribute("src", "2.jpg");
       console.log(photoCompass);
+      window.location.href = "home.html#two";
     }
 
     if (compassDirection > 202 && compassDirection <= 247) {
       photoCompass.setAttribute("src", "1.jpg");
       console.log(photoCompass);
+      window.location.href = "home.html#one";
     }
     if (compassDirection > 247 && compassDirection <= 292) {
       photoCompass.setAttribute("src", "8.jpg");
       console.log(photoCompass);
+      window.location.href = "home.html#eight";
     }
     if (compassDirection > 292 && compassDirection <= 337) {
       photoCompass.setAttribute("src", "7.jpg");
       console.log(photoCompass);
+      window.location.href = "home.html#seven";
     }
   }
 });
