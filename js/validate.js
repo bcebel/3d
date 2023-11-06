@@ -21,6 +21,8 @@ document.addEventListener("DOMContentLoaded", function () {
     if (compassDirection > 337 || compassDirection <= 22) {
       photoCompass.setAttribute("src", "6.jpg");
       console.log(photoCompass);
+      window.location.href = "home.html";
+
     }
 
     if (compassDirection > 22 && compassDirection <= 67) {
