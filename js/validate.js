@@ -1,8 +1,8 @@
 console.log("hello");
 console.log(document.body);
 
-// document.addEventListener("DOMContentLoaded", function () {
-window.addEventListener("deviceorientationabsolute", handleOrientation);
+document.addEventListener("DOMContentLoaded", function () {
+window.addEventListener("deviceorientationabsolute", handleOrientation, true);
 
 function handleOrientation(event) {
   const compassDirection = event.alpha;
@@ -39,4 +39,4 @@ function handleOrientation(event) {
     window.location.href = "home.html#page=seven";
   }
 }
-//});
+});
