@@ -29,7 +29,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (targetUrl) {
-      window.location.href = targetUrl;
+      generateButton(targetUrl);
     }
+  }
+
+  function generateButton(targetUrl) {
+    const buttonContainer = document.getElementById("button-container");
+    const button = document.createElement("a");
+    button.href = targetUrl;
+    button.innerText = "Go to Page";
+    button.className = "ampstart-btn";
+    buttonContainer.appendChild(button);
   }
 });
