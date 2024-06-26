@@ -1,7 +1,9 @@
 console.log("hello");
 console.log(document.body);
 document.addEventListener("DOMContentLoaded");
-
+document.getElementById("demo").onclick = function () {
+  myFunction();
+};
 function myFunction() {
   window.addEventListener("deviceorientationabsolute", handleOrientation, true);
 
