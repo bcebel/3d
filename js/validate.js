@@ -8,37 +8,34 @@ document.addEventListener("DOMContentLoaded", function () {
     const compassDirection = event.alpha;
     console.log("wombats", compassDirection);
 
-    let targetUrl = "";
-
     if (compassDirection > 337 || compassDirection <= 22) {
-      targetUrl = "https://bcebel.github.io/3d/home.html#page=six";
-    } else if (compassDirection > 22 && compassDirection <= 67) {
-      targetUrl = "https://bcebel.github.io/3d/home.html#page=five";
-    } else if (compassDirection > 67 && compassDirection <= 112) {
-      targetUrl = "https://bcebel.github.io/3d/home.html#page=four";
-    } else if (compassDirection > 112 && compassDirection <= 157) {
-      targetUrl = "https://bcebel.github.io/3d/home.html#page=three";
-    } else if (compassDirection > 157 && compassDirection <= 202) {
-      targetUrl = "https://bcebel.github.io/3d/home.html#page=two";
-    } else if (compassDirection > 202 && compassDirection <= 247) {
-      targetUrl = "https://bcebel.github.io/3d/home.html#page=one";
-    } else if (compassDirection > 247 && compassDirection <= 292) {
-      targetUrl = "https://bcebel.github.io/3d/home.html#page=eight";
-    } else if (compassDirection > 292 && compassDirection <= 337) {
-      targetUrl = "https://bcebel.github.io/3d/home.html#page=seven";
+      window.open("https://bcebel.github.io/3d/home.html#page=six");
     }
 
-    if (targetUrl) {
-      generateButton(targetUrl);
+    if (compassDirection > 22 && compassDirection <= 67) {
+      window.open("https://bcebel.github.io/3d/home.html#page=five");
     }
-  }
 
-  function generateButton(targetUrl) {
-    const buttonContainer = document.getElementById("button-container");
-    const button = document.createElement("a");
-    button.href = targetUrl;
-    button.innerText = "Go to Page";
-    button.className = "ampstart-btn";
-    buttonContainer.appendChild(button);
+    if (compassDirection > 67 && compassDirection <= 112) {
+      window.open("https://bcebel.github.io/3d/home.html#page=four");
+    }
+
+    if (compassDirection > 112 && compassDirection <= 157) {
+      window.open("https://bcebel.github.io/3d/home.html#page=three");
+    }
+
+    if (compassDirection > 157 && compassDirection <= 202) {
+      window.open("https://bcebel.github.io/3d/home.html#page=two");
+    }
+
+    if (compassDirection > 202 && compassDirection <= 247) {
+      window.open("https://bcebel.github.io/3d/home.html#page=one");
+    }
+    if (compassDirection > 247 && compassDirection <= 292) {
+      window.open("https://bcebel.github.io/3d/home.html#page=eight");
+    }
+    if (compassDirection > 292 && compassDirection <= 337) {
+      window.open("https://bcebel.github.io/3d/home.html#page=seven");
+    }
   }
 });
