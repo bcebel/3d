@@ -2,13 +2,15 @@ console.log("hello");
 console.log(document.body);
 const name = document.querySelector(".name");
 
-function validate() {
-  document.addEventListener("DOMContentLoaded", function () {
+
+document.addEventListener("DOMContentLoaded", function myButton() {
+    
     window.addEventListener(
       "deviceorientationabsolute",
       handleOrientation,
       true
     );
+
 
     function handleOrientation(event) {
       const compassDirection = event.alpha;
@@ -45,4 +47,3 @@ function validate() {
       }
     }
   });
-}
