@@ -69,7 +69,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (url) {
-      window.open(url);
+var windowReference = window.open();
+
+function openy () {
+  windowReference.location = url;
+};
+openy(url);
     }
   }
 });
