@@ -7,7 +7,6 @@
 
 <body>
     <button id="myButton">Open Link</button>
-    <a id="buttony" style="display:none;"></a>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             console.log("hello");
@@ -17,6 +16,20 @@
             document.getElementById("myButton").addEventListener("click", myButton);
 
             window.addEventListener("deviceorientationabsolute", handleOrientation, true);
+
+            // Request permission for device orientation
+            if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+                DeviceOrientationEvent.requestPermission()
+                    .then(permissionState => {
+                        if (permissionState === 'granted') {
+                            window.addEventListener('deviceorientationabsolute', handleOrientation, true);
+                        }
+                    })
+                    .catch(console.error);
+            } else {
+                // Handle regular non-iOS 13+ devices
+                window.addEventListener('deviceorientationabsolute', handleOrientation, true);
+            }
 
             function handleOrientation(event) {
                 const compassDirection = event.alpha;
@@ -61,11 +74,9 @@
                     menuAddress = "https://bit.ly/4bu7h2U";
                 }
 
-                var link = document.getElementById("buttony");
-                link.setAttribute("href", menuAddress);
                 setTimeout(() => {
-                    link.click();
-                }, 100); // Adding a small delay to ensure the link is properly set
+                    window.location.href = menuAddress;
+                }, 100); // Adding a small delay to ensure the URL is properly set
             }
         });
     </script>
