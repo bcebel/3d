@@ -31,24 +31,43 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function myButton() {
+  var linkElement = document.createElement("a");
+
+  window.document.body.appendChild(linkElement);
+
+  // When the button is clicked, I replaced window.open() with the following code
+  //window.open(menuAddress);
+
+  // Thanks https://stackoverflow.com/a/44487883
+
+
+
     setTimeout(() => {
       if (num == 1) {
-        window.open("./home.html#page=six");
+       var menuAddress = "https://bcebel.github.io/3d/home.html#page=six";
       } else if (num == 2) {
-        window.open("./home.html#page=five");
+        var menuAddress = "https://bcebel.github.io/3d/home.html#page=five";
       } else if (num == 3) {
-        window.open("./home.html#page=four");
+        var menuAddress = "https://bcebel.github.io/3d/home.html#page=four";
       } else if (num == 4) {
-        window.open("./home.html#page=three");
+         var menuAddress = "https://bcebel.github.io/3d/home.html#page=three";
       } else if (num == 5) {
-        window.open("./home.html#page=two");
+         var menuAddress = "https://bcebel.github.io/3d/home.html#page=two";
       } else if (num == 6) {
-        window.open("./home.html#page=one");
+         var menuAddress = "https://bcebel.github.io/3d/home.html#page=one";
       } else if (num == 7) {
-        window.open("./home.html#page=eight");
+         var menuAddress = "https://bcebel.github.io/3d/home.html#page=eight";
       } else if (num == 8) {
-        window.open("./home.html#page=seven");
+         var menuAddress = "https://bcebel.github.io/3d/home.html#page=seven";
       }
+        var link = document.getElementById("buttony");
+        link.setAttribute("href", menuAddress);
+        link.click();
     });
+    
   }
 });
+
+
+  // Add a <a> to use to download an image file
+
