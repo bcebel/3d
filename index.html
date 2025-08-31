@@ -12,122 +12,259 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
             background-color: #f0f0f0;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         h1 {
             color: #333;
+            margin-bottom: 20px;
         }
 
         #compass {
-            font-size: 2em;
+            font-size: 1.5em;
             margin: 20px;
-            padding: 20px;
+            padding: 30px;
             background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             text-align: center;
+            max-width: 400px;
+            width: 100%;
         }
 
         #direction {
             font-weight: bold;
+            color: #2c5aa0;
+            font-size: 1.3em;
+        }
+
+        #degrees {
+            color: #666;
+            font-size: 1.1em;
         }
 
         button {
-            padding: 10px 20px;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            margin: 15px 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            background-color: #4CAF50;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        button:hover:not(:disabled) {
+            background-color: #45a049;
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .link-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #2196F3;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
             font-size: 1.2em;
             margin: 10px;
-            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .link-button:hover {
+            background-color: #1976D2;
+        }
+
+        #status {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+
+        .calibration-tip {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 0.9em;
+            color: #856404;
         }
     </style>
 </head>
 
 <body>
-    <h1>Feng Shui 3D</h1>
+    <h1>Feng Shui 3D Compass</h1>
     <div id="compass">
-        <p>Point your phone North (0 degrees)</p>
-        <p>Direction: <span id="direction">Waiting for data...</span></p>
-        <p>Degrees: <span id="degrees">0</span>°</p>
-        <p><a href="https://bcebel.github.io/3d/home.html">Then Click Me</a></p>
+        <p>Point your phone North (0°) then proceed</p>
+        <p>Direction: <span id="direction">Tap "Start Compass" below</span></p>
+        <p>Degrees: <span id="degrees">--</span>°</p>
+
+        <div class="calibration-tip" id="calibrationTip" style="display: none;">
+            <strong>Tip:</strong> If readings seem off, move your phone in a figure-8 pattern to calibrate the compass.
+        </div>
+
         <button id="startCompass">Start Compass</button>
+        <button id="stopCompass" style="display: none;">Stop Compass</button>
+
+        <div id="status"></div>
+
+        <a href="https://bcebel.github.io/3d/home.html" class="link-button">Continue to 3D Experience</a>
     </div>
 
     <script>
+        let isCompassActive = false;
+        let orientationHandler = null;
+
         // Function to convert degrees to cardinal direction
         function getCardinalDirection(angle) {
-            const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
-            const index = Math.round(((angle % 360) / 45)) % 8;
+            const directions = [
+                'N', 'NNE', 'NE', 'ENE',
+                'E', 'ESE', 'SE', 'SSE',
+                'S', 'SSW', 'SW', 'WSW',
+                'W', 'WNW', 'NW', 'NNW'
+            ];
+            const index = Math.round(((angle % 360) / 22.5)) % 16;
             return directions[index];
         }
 
-        // Handle device orientation
-        function handleOrientation(event) {
-            console.log('Orientation event:', event); // Debug log
-            let heading = event.webkitCompassHeading || event.alpha;
+        // Enhanced orientation handler
+        function createOrientationHandler() {
+            return function (event) {
+                console.log('Orientation event:', event);
+                let heading = null;
 
-            // Adjust for device orientation if alpha is used
-            if (event.alpha !== null && !event.webkitCompassHeading) {
-                heading = 360 - event.alpha; // Convert alpha to heading
-            }
+                // Try different compass heading sources
+                if (event.webkitCompassHeading !== undefined && event.webkitCompassHeading !== null) {
+                    heading = event.webkitCompassHeading;
+                } else if (event.alpha !== undefined && event.alpha !== null) {
+                    // Convert alpha to compass heading
+                    heading = 360 - event.alpha;
+                }
 
-            console.log('Raw heading:', heading); // Debug log
-            if (heading !== null && heading !== undefined) {
-                heading = Math.round(heading * 100) / 100; // Round to 2 decimal places
-                document.getElementById('degrees').textContent = heading;
-                document.getElementById('direction').textContent = getCardinalDirection(heading);
-            } else {
-                document.getElementById('direction').textContent = 'Data unavailable. Move device in a figure-8 to calibrate.';
-            }
+                console.log('Calculated heading:', heading);
+
+                if (heading !== null && !isNaN(heading)) {
+                    heading = ((heading % 360) + 360) % 360; // Normalize to 0-360
+                    heading = Math.round(heading * 10) / 10; // Round to 1 decimal place
+
+                    document.getElementById('degrees').textContent = heading;
+                    document.getElementById('direction').textContent = getCardinalDirection(heading);
+                    document.getElementById('status').textContent = 'Compass active - readings updated';
+
+                    // Show calibration tip after a few seconds
+                    setTimeout(() => {
+                        document.getElementById('calibrationTip').style.display = 'block';
+                    }, 3000);
+                } else {
+                    document.getElementById('direction').textContent = 'Calibrating...';
+                    document.getElementById('status').textContent = 'Move device in figure-8 to calibrate';
+                }
+            };
         }
 
-        // Get the start button
-        const startButton = document.getElementById('startCompass');
-        if (!startButton) {
-            console.error('Start button not found');
-            document.getElementById('direction').textContent = 'Error: App initialization failed';
-            return;
-        }
-
-        // Add click event listener to start compass
-        startButton.addEventListener('click', async () => {
-            console.log('Start Compass button clicked'); // Debug log
+        // Check if device orientation is supported
+        function checkSupport() {
             if (!window.DeviceOrientationEvent) {
-                console.error('Device orientation not supported');
                 document.getElementById('direction').textContent = 'Compass not supported';
+                document.getElementById('status').textContent = 'This device does not support compass functionality';
+                document.getElementById('startCompass').disabled = true;
+                return false;
+            }
+            return true;
+        }
+
+        // Start compass function
+        async function startCompass() {
+            console.log('Starting compass...');
+
+            if (isCompassActive) return;
+
+            try {
+                // Check for iOS permission requirement
+                if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+                    console.log('Requesting iOS permission...');
+                    document.getElementById('status').textContent = 'Requesting permission...';
+
+                    const permissionState = await DeviceOrientationEvent.requestPermission();
+                    console.log('Permission result:', permissionState);
+
+                    if (permissionState !== 'granted') {
+                        document.getElementById('direction').textContent = 'Permission denied';
+                        document.getElementById('status').textContent = 'Please enable motion & orientation access in Safari settings';
+                        return;
+                    }
+                }
+
+                // Create and add event listener
+                orientationHandler = createOrientationHandler();
+                window.addEventListener('deviceorientation', orientationHandler, true);
+
+                isCompassActive = true;
+                document.getElementById('startCompass').style.display = 'none';
+                document.getElementById('stopCompass').style.display = 'inline-block';
+                document.getElementById('status').textContent = 'Compass started - point phone north';
+
+            } catch (error) {
+                console.error('Error starting compass:', error);
+                document.getElementById('direction').textContent = 'Error accessing compass';
+                document.getElementById('status').textContent = 'Failed to start compass: ' + error.message;
+            }
+        }
+
+        // Stop compass function
+        function stopCompass() {
+            if (!isCompassActive) return;
+
+            if (orientationHandler) {
+                window.removeEventListener('deviceorientation', orientationHandler, true);
+                orientationHandler = null;
+            }
+
+            isCompassActive = false;
+            document.getElementById('startCompass').style.display = 'inline-block';
+            document.getElementById('stopCompass').style.display = 'none';
+            document.getElementById('direction').textContent = 'Compass stopped';
+            document.getElementById('status').textContent = 'Tap "Start Compass" to begin';
+            document.getElementById('calibrationTip').style.display = 'none';
+        }
+
+        // Initialize app
+        function initApp() {
+            if (!checkSupport()) return;
+
+            const startButton = document.getElementById('startCompass');
+            const stopButton = document.getElementById('stopCompass');
+
+            if (!startButton || !stopButton) {
+                console.error('Required buttons not found');
+                document.getElementById('direction').textContent = 'App initialization failed';
                 return;
             }
 
-            try {
-                if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-                    console.log('Requesting iOS permission'); // Debug log
-                    const permissionState = await DeviceOrientationEvent.requestPermission();
-                    console.log('Permission state:', permissionState); // Debug log
-                    if (permissionState === 'granted') {
-                        window.addEventListener('deviceorientation', handleOrientation, true);
-                        startButton.disabled = true;
-                        startButton.textContent = 'Compass Active';
-                    } else {
-                        console.error('Permission denied');
-                        document.getElementById('direction').textContent = 'Permission denied. Enable in Safari settings.';
-                    }
-                } else {
-                    console.log('Non-iOS device, starting compass'); // Debug log
-                    window.addEventListener('deviceorientation', handleOrientation, true);
-                    startButton.disabled = true;
-                    startButton.textContent = 'Compass Active';
-                }
-            } catch (error) {
-                console.error('Error requesting permission:', error);
-                document.getElementById('direction').textContent = 'Error accessing compass';
-            }
+            startButton.addEventListener('click', startCompass);
+            stopButton.addEventListener('click', stopCompass);
+
+            document.getElementById('status').textContent = 'Ready - tap "Start Compass" to begin';
+        }
+
+        // Clean up on page unload
+        window.addEventListener('beforeunload', () => {
+            stopCompass();
         });
 
-        // Clean up event listeners on page unload
-        window.addEventListener('unload', () => {
-            window.removeEventListener('deviceorientation', handleOrientation, true);
-        });
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', initApp);
     </script>
 </body>
 
