@@ -1,12 +1,12 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html ⚡ lang="en">
 
 <head>
     <meta charset="utf-8">
-    <script async src="https://cdn.ampproject.org/v0.js"></script>
-    <title>Hello, AMPs</title>
-    <link rel="canonical" href="https://amp.dev/documentation/guides-and-tutorials/start/create/basic_markup/">
+    <title>Feng Shui 360</title>
+    <link rel="canonical" href="https://bcebel.github.io/3d/index.html">
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
     <script async custom-element="amp-script" src="https://cdn.ampproject.org/v0/amp-script-0.1.js"></script>
     <style amp-boilerplate>
         body {
@@ -65,7 +65,8 @@
                 visibility: visible
             }
         }
-    </style><noscript>
+    </style>
+    <noscript>
         <style amp-boilerplate>
             body {
                 -webkit-animation: none;
@@ -75,10 +76,27 @@
             }
         </style>
     </noscript>
+    <style amp-custom>
+        body {
+            font-family: 'Oswald', sans-serif;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
-    <script src="js/validate.js" width="300" height="200"></script>
+    <h1>Feng Shui 360</h1>
+    <p>Allow device orientation access and click to start.</p>
+    <button id="myButton">Start Feng Shui</button>
+    <amp-script layout="container" src="js/validate.js">
+        <p>Your browser does not support this feature.</p>
+    </amp-script>
 </body>
 
 </html>
