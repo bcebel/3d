@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phone Compass</title>
+    <title>Feng Shui 3D</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -28,25 +28,34 @@
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
         }
 
         #direction {
             font-weight: bold;
         }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            margin: 10px;
+            cursor: pointer;
+        }
     </style>
 </head>
 
 <body>
-    <h1>Feng Shui 3d</h1>
+    <h1>Feng Shui 3D</h1>
     <div id="compass">
         <p>Point your phone North (0 degrees)</p>
         <p>Direction: <span id="direction">Waiting for data...</span></p>
         <p>Degrees: <span id="degrees">0</span>°</p>
-        <p><a href="https://bcebel.github.io/3d/home.html">Then Click Me</a>  </p>
+        <p><a href="https://bcebel.github.io/3d/home.html">Then Click Me</a></p>
+        <button id="startCompass">Start Compass</button>
     </div>
 
     <script>
-        // Function to convert degrees to cardinal direction (N, NE, E, etc.)
+        // Function to convert degrees to cardinal direction
         function getCardinalDirection(angle) {
             const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
             const index = Math.round(((angle % 360) / 45)) % 8;
@@ -63,38 +72,55 @@
             }
 
             if (heading !== null && heading !== undefined) {
-                // Round to 2 decimal places
-                heading = Math.round(heading * 100) / 100;
+                heading = Math.round(heading * 100) / 100; // Round to 2 decimal places
                 document.getElementById('degrees').textContent = heading;
                 document.getElementById('direction').textContent = getCardinalDirection(heading);
             } else {
-                document.getElementById('direction').textContent = 'Data unavailable';
+                document.getElementById('direction').textContent = 'Data unavailable. Move device in a figure-8 to calibrate.';
             }
         }
 
-        // Check if DeviceOrientationEvent is supported
-        if (window.DeviceOrientationEvent) {
-            // Request permission for iOS 13+ devices
-            if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-                DeviceOrientationEvent.requestPermission()
-                    .then(permissionState => {
-                        if (permissionState === 'granted') {
-                            window.addEventListener('deviceorientation', handleOrientation, true);
-                        } else {
-                            document.getElementById('direction').textContent = 'Permission denied';
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error requesting permission:', error);
-                        document.getElementById('direction').textContent = 'Error accessing compass';
-                    });
-            } else {
-                // Non-iOS or older browsers
-                window.addEventListener('deviceorientation', handleOrientation, true);
-            }
-        } else {
-            document.getElementById('direction').textContent = 'Compass not supported';
+        // Get the start button
+        const startButton = document.getElementById('startCompass');
+        if (!startButton) {
+            console.error('Start button not found');
+            document.getElementById('direction').textContent = 'Error: App initialization failed';
+            return;
         }
+
+        // Add click event listener to start compass
+        startButton.addEventListener('click', async () => {
+            if (!window.DeviceOrientationEvent) {
+                document.getElementById('direction').textContent = 'Compass not supported';
+                return;
+            }
+
+            try {
+                if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+                    const permissionState = await DeviceOrientationEvent.requestPermission();
+                    if (permissionState === 'granted') {
+                        window.addEventListener('deviceorientation', handleOrientation, true);
+                        startButton.disabled = true; // Disable button after starting
+                        startButton.textContent = 'Compass Active';
+                    } else {
+                        document.getElementById('direction').textContent = 'Permission denied. Enable in Safari settings.';
+                    }
+                } else {
+                    // Non-iOS devices
+                    window.addEventListener('deviceorientation', handleOrientation, true);
+                    startButton.disabled = true;
+                    startButton.textContent = 'Compass Active';
+                }
+            } catch (error) {
+                console.error('Error requesting permission:', error);
+                document.getElementById('direction').textContent = 'Error accessing compass';
+            }
+        });
+
+        // Clean up event listeners on page unload
+        window.addEventListener('unload', () => {
+            window.removeEventListener('deviceorientation', handleOrientation, true);
+        });
     </script>
 </body>
 
