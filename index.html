@@ -64,13 +64,15 @@
 
         // Handle device orientation
         function handleOrientation(event) {
+            console.log('Orientation event:', event); // Debug log
             let heading = event.webkitCompassHeading || event.alpha;
 
-            // Adjust for device orientation if alpha is used (iOS fallback)
+            // Adjust for device orientation if alpha is used
             if (event.alpha !== null && !event.webkitCompassHeading) {
                 heading = 360 - event.alpha; // Convert alpha to heading
             }
 
+            console.log('Raw heading:', heading); // Debug log
             if (heading !== null && heading !== undefined) {
                 heading = Math.round(heading * 100) / 100; // Round to 2 decimal places
                 document.getElementById('degrees').textContent = heading;
@@ -90,23 +92,28 @@
 
         // Add click event listener to start compass
         startButton.addEventListener('click', async () => {
+            console.log('Start Compass button clicked'); // Debug log
             if (!window.DeviceOrientationEvent) {
+                console.error('Device orientation not supported');
                 document.getElementById('direction').textContent = 'Compass not supported';
                 return;
             }
 
             try {
                 if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+                    console.log('Requesting iOS permission'); // Debug log
                     const permissionState = await DeviceOrientationEvent.requestPermission();
+                    console.log('Permission state:', permissionState); // Debug log
                     if (permissionState === 'granted') {
                         window.addEventListener('deviceorientation', handleOrientation, true);
-                        startButton.disabled = true; // Disable button after starting
+                        startButton.disabled = true;
                         startButton.textContent = 'Compass Active';
                     } else {
+                        console.error('Permission denied');
                         document.getElementById('direction').textContent = 'Permission denied. Enable in Safari settings.';
                     }
                 } else {
-                    // Non-iOS devices
+                    console.log('Non-iOS device, starting compass'); // Debug log
                     window.addEventListener('deviceorientation', handleOrientation, true);
                     startButton.disabled = true;
                     startButton.textContent = 'Compass Active';
