@@ -1,154 +1,99 @@
 <!DOCTYPE html>
-<html ⚡ lang="en">
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <title>Feng Shui 360</title>
-    <link rel="canonical" href="https://bcebel.github.io/3d/index.html">
-    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-    <script async src="https://cdn.ampproject.org/v0.js"></script>
-    <script async custom-element="amp-story" src="https://cdn.ampproject.org/v0/amp-story-1.0.js"></script>
-    <script async custom-element="amp-story-360" src="https://cdn.ampproject.org/v0/amp-story-360-0.1.js"></script>
-    <script async custom-element="amp-script" src="https://cdn.ampproject.org/v0/amp-script-0.1.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Oswald:200,300,400" rel="stylesheet">
-    <style amp-boilerplate>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone Compass</title>
+    <style>
         body {
-            -webkit-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
-            -moz-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
-            -ms-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
-            animation: -amp-start 8s steps(1, end) 0s 1 normal both
-        }
-
-        @-webkit-keyframes -amp-start {
-            from {
-                visibility: hidden
-            }
-
-            to {
-                visibility: visible
-            }
-        }
-
-        @-moz-keyframes -amp-start {
-            from {
-                visibility: hidden
-            }
-
-            to {
-                visibility: visible
-            }
-        }
-
-        @-ms-keyframes -amp-start {
-            from {
-                visibility: hidden
-            }
-
-            to {
-                visibility: visible
-            }
-        }
-
-        @-o-keyframes -amp-start {
-            from {
-                visibility: hidden
-            }
-
-            to {
-                visibility: visible
-            }
-        }
-
-        @keyframes -amp-start {
-            from {
-                visibility: hidden
-            }
-
-            to {
-                visibility: visible
-            }
-        }
-    </style>
-    <noscript>
-        <style amp-boilerplate>
-            body {
-                -webkit-animation: none;
-                -moz-animation: none;
-                -ms-animation: none;
-                animation: none
-            }
-        </style>
-    </noscript>
-    <style amp-custom>
-        amp-story {
-            font-family: 'Oswald', sans-serif;
-            color: #fff;
-        }
-
-        amp-story-page {
-            background-color: #000;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
         }
 
         h1 {
-            font-weight: bold;
-            font-size: 2.875em;
-            line-height: 1.174;
+            color: #333;
         }
 
-        p {
-            font-weight: normal;
-            font-size: 1.3em;
-            line-height: 1.5em;
-            color: #fff;
-        }
-
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
+        #compass {
+            font-size: 2em;
+            margin: 20px;
+            padding: 20px;
             background-color: #fff;
-            color: #000;
-            border: none;
-            border-radius: 5px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
 
-        #compassStatus {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-        }
-
-        .hidden {
-            display: none;
+        #direction {
+            font-weight: bold;
         }
     </style>
 </head>
 
 <body>
-    <amp-story standalone title="360 Feng Shui" publisher="bcemedia"
-        publisher-logo-src="assets/AMP-Brand-White-Icon.svg" poster-portrait-src="assets/cover.jpg">
-        <!-- Cover page with compass prompt -->
-        <amp-story-page id="cover">
-            <amp-story-grid-layer template="vertical">
-                <h1>Feng Shui 360</h1>
-                <p id="compassStatus">Please point your device north (0°) and click Start.</p>
-                <button id="startButton">Start</button>
-            </amp-story-grid-layer>
-        </amp-story-page>
+    <h1>Phone Compass</h1>
+    <div id="compass">
+        <p>Direction: <span id="direction">Waiting for data...</span></p>
+        <p>Degrees: <span id="degrees">0</span>°</p>
+    </div>
 
-        <!-- 360 Image page -->
-        <amp-story-page id="fengshui">
-            <amp-story-360 layout="fill" scene-heading="0" controls="gyroscope touch" id="fengshui360">
-                <amp-img layout="fill" src="assets/fengshui.png"></amp-img>
-            </amp-story-360>
-        </amp-story-page>
-    </amp-story>
+    <script>
+        // Function to convert degrees to cardinal direction (N, NE, E, etc.)
+        function getCardinalDirection(angle) {
+            const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+            const index = Math.round(((angle % 360) / 45)) % 8;
+            return directions[index];
+        }
 
-    <amp-script layout="container" src="js/compass.js">
-        <p>Your browser does not support this feature.</p>
-    </amp-script>
+        // Handle device orientation
+        function handleOrientation(event) {
+            let heading = event.webkitCompassHeading || event.alpha;
+
+            // Adjust for device orientation if alpha is used (iOS fallback)
+            if (event.alpha !== null && !event.webkitCompassHeading) {
+                heading = 360 - event.alpha; // Convert alpha to heading
+            }
+
+            if (heading !== null && heading !== undefined) {
+                // Round to 2 decimal places
+                heading = Math.round(heading * 100) / 100;
+                document.getElementById('degrees').textContent = heading;
+                document.getElementById('direction').textContent = getCardinalDirection(heading);
+            } else {
+                document.getElementById('direction').textContent = 'Data unavailable';
+            }
+        }
+
+        // Check if DeviceOrientationEvent is supported
+        if (window.DeviceOrientationEvent) {
+            // Request permission for iOS 13+ devices
+            if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+                DeviceOrientationEvent.requestPermission()
+                    .then(permissionState => {
+                        if (permissionState === 'granted') {
+                            window.addEventListener('deviceorientation', handleOrientation, true);
+                        } else {
+                            document.getElementById('direction').textContent = 'Permission denied';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error requesting permission:', error);
+                        document.getElementById('direction').textContent = 'Error accessing compass';
+                    });
+            } else {
+                // Non-iOS or older browsers
+                window.addEventListener('deviceorientation', handleOrientation, true);
+            }
+        } else {
+            document.getElementById('direction').textContent = 'Compass not supported';
+        }
+    </script>
 </body>
 
 </html>
