@@ -44,21 +44,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
     setTimeout(() => {
       if (num == 1) {
-       var menuAddress = "https://bit.ly/4cxXOc2";
+       var menuAddress = "https://bcebel.github.io/3d/home.html#page=six";
       } else if (num == 2) {
-        var menuAddress = "https://bit.ly/3XSGxFY";
+        var menuAddress = "https://bcebel.github.io/3d/home.html#page=five";
       } else if (num == 3) {
-        var menuAddress = "https://bit.ly/3zyJNMH";
+        var menuAddress = "https://bcebel.github.io/3d/home.html#page=four";
       } else if (num == 4) {
-         var menuAddress = "https://bit.ly/3zGFKxO";
+         var menuAddress = "https://bcebel.github.io/3d/home.html#page=three";
       } else if (num == 5) {
-         var menuAddress = "https://bit.ly/45SPrp9";
+         var menuAddress = "https://bcebel.github.io/3d/home.html#page=two";
       } else if (num == 6) {
-         var menuAddress = "https://bit.ly/45WW3CT";
+         var menuAddress = "https://bcebel.github.io/3d/home.html#page=one";
       } else if (num == 7) {
-         var menuAddress = "https://bit.ly/4bFakFs";
+         var menuAddress = "https://bcebel.github.io/3d/home.html#page=eight";
       } else if (num == 8) {
-         var menuAddress = "https://bit.ly/4bu7h2U";
+         var menuAddress = "https://bcebel.github.io/3d/home.html#page=seven";
       }
         var link = document.getElementById("buttony");
         link.setAttribute("href", menuAddress);
