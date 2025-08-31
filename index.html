@@ -7,7 +7,10 @@
     <link rel="canonical" href="https://bcebel.github.io/3d/index.html">
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
     <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script async custom-element="amp-story" src="https://cdn.ampproject.org/v0/amp-story-1.0.js"></script>
+    <script async custom-element="amp-story-360" src="https://cdn.ampproject.org/v0/amp-story-360-0.1.js"></script>
     <script async custom-element="amp-script" src="https://cdn.ampproject.org/v0/amp-script-0.1.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Oswald:200,300,400" rel="stylesheet">
     <style amp-boilerplate>
         body {
             -webkit-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
@@ -77,24 +80,73 @@
         </style>
     </noscript>
     <style amp-custom>
-        body {
+        amp-story {
             font-family: 'Oswald', sans-serif;
-            text-align: center;
+            color: #fff;
+        }
+
+        amp-story-page {
+            background-color: #000;
+        }
+
+        h1 {
+            font-weight: bold;
+            font-size: 2.875em;
+            line-height: 1.174;
+        }
+
+        p {
+            font-weight: normal;
+            font-size: 1.3em;
+            line-height: 1.5em;
+            color: #fff;
         }
 
         button {
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
+            background-color: #fff;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #compassStatus {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 
 <body>
-    <h1>Feng Shui 360</h1>
-    <p>Allow device orientation access and click to start.</p>
-    <button id="myButton">Start Feng Shui</button>
-    <amp-script layout="container" src="js/validate.js">
+    <amp-story standalone title="360 Feng Shui" publisher="bcemedia"
+        publisher-logo-src="assets/AMP-Brand-White-Icon.svg" poster-portrait-src="assets/cover.jpg">
+        <!-- Cover page with compass prompt -->
+        <amp-story-page id="cover">
+            <amp-story-grid-layer template="vertical">
+                <h1>Feng Shui 360</h1>
+                <p id="compassStatus">Please point your device north (0°) and click Start.</p>
+                <button id="startButton">Start</button>
+            </amp-story-grid-layer>
+        </amp-story-page>
+
+        <!-- 360 Image page -->
+        <amp-story-page id="fengshui">
+            <amp-story-360 layout="fill" scene-heading="0" controls="gyroscope touch" id="fengshui360">
+                <amp-img layout="fill" src="assets/fengshui.png"></amp-img>
+            </amp-story-360>
+        </amp-story-page>
+    </amp-story>
+
+    <amp-script layout="container" src="js/compass.js">
         <p>Your browser does not support this feature.</p>
     </amp-script>
 </body>
