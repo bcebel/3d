@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ⚡ lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feng Shui 3D</title>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -104,6 +106,17 @@
 </head>
 
 <body>
+    <!-- Analytics -->
+    <amp-analytics type="gtag" data-credentials="include">
+        <script type="application/json">
+    {
+      "vars": {
+        "gtag_id": "G-L3SKF0FS1W",
+        "config": { "G-L3SKF0FS1W": {} }
+      }
+    }
+        </script>
+    </amp-analytics>
     <h1>Feng Shui 3D Compass</h1>
     <div id="compass">
         <p>Point your phone North (0°) then proceed</p>
@@ -121,6 +134,7 @@
 
         <a href="https://bcebel.github.io/3d/home.html" class="link-button">Continue to 3D Experience</a>
     </div>
+
 
     <script>
         let isCompassActive = false;

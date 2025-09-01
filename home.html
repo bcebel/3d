@@ -9,6 +9,7 @@
     <script async src="https://cdn.ampproject.org/v0.js"></script>
     <script async custom-element="amp-story" src="https://cdn.ampproject.org/v0/amp-story-1.0.js"></script>
     <script async custom-element="amp-story-360" src="https://cdn.ampproject.org/v0/amp-story-360-0.1.js"></script>
+    <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Oswald:200,300,400" rel="stylesheet">
     <style amp-boilerplate>
         body {
@@ -120,7 +121,17 @@
         publisher-logo-src="assets/AMP-Brand-White-Icon.svg" poster-portrait-src="assets/cover.jpg">
         <!-- Cover page -->
 
-
+        <!-- Analytics -->
+        <amp-analytics type="gtag" data-credentials="include">
+            <script type="application/json">
+        {
+          "vars": {
+            "gtag_id": "G-L3SKF0FS1W",
+            "config": { "G-L3SKF0FS1W": {} }
+          }
+        }
+            </script>
+        </amp-analytics>
         <amp-story-page id="six">
             <amp-story-360 layout="fill" heading-start="11" controls="gyroscope">
                 <amp-img layout="fill" src="5.png"></amp-img>
